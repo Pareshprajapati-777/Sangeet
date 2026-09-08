@@ -177,20 +177,14 @@ def _render_artist_classifier_tab(classifier_service: ArtistClassifierService):
         if choice and choice in PRESET_LYRICS:
             st.session_state["hf_artist_lyrics_input"] = PRESET_LYRICS[choice]["text"]
 
-    col_preset, col_clear = st.columns([3, 1])
-    with col_preset:
-        preset_choice = st.selectbox(
-            "📋 Quick Sample Lyrics Preset (Choose from 23 iconic artist tracks):",
-            ["— Choose a sample lyric —"] + list(PRESET_LYRICS.keys()),
-            key="hf_artist_preset_select",
-            on_change=_apply_preset,
-        )
-    with col_clear:
-        st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
-        if st.button("🧹 Clear", key="btn_clear_lyrics", use_container_width=True):
-            st.session_state["hf_artist_lyrics_input"] = ""
-            st.session_state["hf_artist_preset_select"] = "— Choose a sample lyric —"
-            st.rerun()
+    def _set_quick_preset(p_key: str):
+        st.session_state["hf_artist_preset_select"] = p_key
+        if p_key in PRESET_LYRICS:
+            st.session_state["hf_artist_lyrics_input"] = PRESET_LYRICS[p_key]["text"]
+
+    def _clear_lyrics():
+        st.session_state["hf_artist_lyrics_input"] = ""
+        st.session_state["hf_artist_preset_select"] = "— Choose a sample lyric —"
 
     # Quick Demo Picks buttons
     st.markdown("<div style='font-size:0.83rem; font-weight:700; color:#475569; margin: 6px 0;'>⚡ Instant Demo Buttons:</div>", unsafe_allow_html=True)
@@ -205,10 +199,30 @@ def _render_artist_classifier_tab(classifier_service: ArtistClassifierService):
     ]
     for col, (label, p_key) in zip(demo_cols, quick_picks):
         with col:
-            if st.button(f"🎵 {label}", key=f"quick_demo_{label}", use_container_width=True):
-                st.session_state["hf_artist_lyrics_input"] = PRESET_LYRICS[p_key]["text"]
-                st.session_state["hf_artist_preset_select"] = p_key
-                st.rerun()
+            st.button(
+                f"🎵 {label}",
+                key=f"quick_demo_{label}",
+                on_click=_set_quick_preset,
+                args=(p_key,),
+                use_container_width=True,
+            )
+
+    col_preset, col_clear = st.columns([3, 1])
+    with col_preset:
+        preset_choice = st.selectbox(
+            "📋 Quick Sample Lyrics Preset (Choose from 23 iconic artist tracks):",
+            ["— Choose a sample lyric —"] + list(PRESET_LYRICS.keys()),
+            key="hf_artist_preset_select",
+            on_change=_apply_preset,
+        )
+    with col_clear:
+        st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+        st.button(
+            "🧹 Clear",
+            key="btn_clear_lyrics",
+            on_click=_clear_lyrics,
+            use_container_width=True,
+        )
 
     if "hf_artist_lyrics_input" not in st.session_state:
         st.session_state["hf_artist_lyrics_input"] = ""
