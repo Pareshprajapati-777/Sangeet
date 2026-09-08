@@ -1,0 +1,212 @@
+
+  "AM_Studios": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0475° N, 80.2452° E",
+    "type": "Music Recording & Scoring Studio",
+    "description": "Owned by Oscar-winning composer A.R. Rahman, it features world-class orchestral scoring stages and advanced Dolby Atmos mixing capabilities."
+  },
+  "Mehboob_Studio": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "19.0522° N, 72.8277° E",
+    "type": "Film Shooting Location",
+    "description": "A historic, legendary filming landmark in Bandra established in 1954, hosting countless iconic Bollywood productions and fashion events."
+  },
+  "AVM_Studios": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0478° N, 80.2185° E",
+    "type": "Film Studio Complex",
+    "description": "One of India's oldest surviving and most prolific film production studios, central to the growth of Tamil, Telugu, and Hindi cinema."
+  },
+  "Sound_Ideaz": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "19.1311° N, 72.8354° E",
+    "type": "Music Recording Studio",
+    "description": "A premier professional audio engineering facility located in Andheri West, specializing in high-end sync sound, mixing, and film background scores."
+  },
+  "20db_Sound_Studios": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0330° N, 80.2550° E",
+    "type": "Audio Mixing & Mastering Studio",
+    "description": "A specialized boutique studio known for pristine acoustic design, widely trusted by top South Indian and independent music producers."
+  }
+
+  "Prasad_Labs": {
+    "location": "Hyderabad, Telangana",
+    "coordinates": "17.4239° N, 78.4483° E",
+    "type": "Post-Production & Sound Studio",
+    "description": "A historic hub for Telugu cinema offering state-of-the-art digital intermediate, mixing, and visual effects services."
+  },
+  "Annapurna_Studios": {
+    "location": "Hyderabad, Telangana",
+    "coordinates": "17.4285° N, 78.4312° E",
+    "type": "Film Studio Complex",
+    "description": "Founded by veteran actor Akkineni Nageswara Rao, equipped with high-end floors, editing suites, and outdoor setups."
+  },
+  "Ramanaidu_Studios": {
+    "location": "Hyderabad, Telangana",
+    "coordinates": "17.3984° N, 78.4079° E",
+    "type": "Film Shooting Location",
+    "description": "Overlooking the Hussain Sagar lake, it is a prominent landmark providing scenic outdoor backdrops and indoor shooting floors."
+  },
+  "Geetha_Arts": {
+    "location": "Hyderabad, Telangana",
+    "coordinates": "17.4344° N, 78.4452° E",
+    "type": "Production & Sound Facility",
+    "description": "A premier production house and sound editing unit instrumental in massive Tollywood and pan-Indian commercial blockbusters."
+  },
+  "Aashirwad_Cinemas_Studio": {
+    "location": "Kochi, Kerala",
+    "coordinates": "9.9816° N, 76.2999° E",
+    "type": "Film Production Hub",
+    "description": "Associated with Malayalam superstar Mohanlal, housing production coordination and regional audio-visual suites."
+  },
+  "Prasad_Studios": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0500° N, 80.2122° E",
+    "type": "Audio Recording & Mixing Studio",
+    "description": "A legendary destination for South Indian film re-recording, mixing, and background score production."
+  },
+  "Vijaya_Vauhini_Studios": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0515° N, 80.2110° E",
+    "type": "Historic Film Studio",
+    "description": "Once the largest film studio in Asia, heavily tied to the golden eras of Tamil and Telugu cinematic history."
+  },
+  "Famous_Studios": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "18.9838° N, 72.8155° E",
+    "type": "Film & Sound Studio",
+    "description": "Located in Tardeo, Mumbai, it has served Bollywood since 1946 for film shooting, editing, and audio dubbing."
+  },
+  "Satyam_Studios": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "19.1197° N, 72.8464° E",
+    "type": "Audio Recording Studio",
+    "description": "A classic Mumbai recording space utilized for television commercial tracks, vocal dubbing, and voiceovers."
+  },
+  "Technicians_Studio": {
+    "location": "Kolkata, West Bengal",
+    "coordinates": "22.4988° N, 88.3585° E",
+    "type": "Film Studio Complex",
+    "description": "The historic nerve center of Tollywood (Bengali cinema) in Tollygunge, hosting generations of regional productions."
+  },
+  "T_Series_Stage_Works": {
+    "location": "Noida, Uttar Pradesh",
+    "coordinates": "28.5700° N, 77.3200° E",
+    "type": "Music Production Facility",
+    "description": "Massive acoustic recording and video shooting floors managed by India's largest music label."
+  },
+  "Enzy_Studios": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "19.1350° N, 72.8220° E",
+    "type": "Acoustic Music Studio",
+    "description": "A boutique high-end recording studio in Mumbai favored for live instrument tracking and intimate vocal production."
+  },
+  "Benchmark_Studios": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "19.1550° N, 72.8400° E",
+    "type": "Audio Post-Production",
+    "description": "Specializes in surround sound mixing, television broadcast mixing, and independent record production."
+  },
+  "Island_City_Studios": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "18.9950° N, 72.8250° E",
+    "type": "Premier Recording Studio",
+    "description": "An international-standard recording complex in Mumbai featuring vintage Neve consoles and spacious tracking rooms."
+  },
+  "Sonic_Station": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "19.0800° N, 72.8500° E",
+    "type": "Boutique Sound Studio",
+    "description": "Known for crystal-clear vocal production and modern digital mixing workflows for independent artists."
+  },
+  "Octavius_Studios": {
+    "location": "Kolkata, West Bengal",
+    "coordinates": "22.5726° N, 88.3639° E",
+    "type": "Music & Voice Studio",
+    "description": "A modern recording hub in East India catering to independent Bengali bands, folk fusion, and ad jingles."
+  },
+  "Studio_Vibrations": {
+    "location": "Kolkata, West Bengal",
+    "coordinates": "22.5200° N, 88.3600° E",
+    "type": "Audio Recording Studio",
+    "description": "Well-regarded regional facility providing precise tracking, mixing, and mastering for independent creators."
+  },
+  "Panache_Studios": {
+    "location": "New Delhi, Delhi",
+    "coordinates": "28.6139° N, 77.2090° E",
+    "type": "Recording & Dubbing Studio",
+    "description": "A central Delhi destination handling corporate audio production, documentary scoring, and foreign language dubbing."
+  },
+  "Audio_Garage": {
+    "location": "Mumbai, Maharashtra",
+    "coordinates": "19.1400° N, 72.8300° E",
+    "type": "Music Production Studio",
+    "description": "A creative workspace tailored for prominent Bollywood music directors, programmers, and session players."
+  },
+  "nuMedia_Studios": {
+    "location": "Bengaluru, Karnataka",
+    "coordinates": "12.9716° N, 77.5946° E",
+    "type": "Sound Design & Recording",
+    "description": "A South Bengaluru hub handling gaming audio, Kannada film tracks, and corporate sound branding."
+  },
+  "Tharangini_Studio": {
+    "location": "Kochi, Kerala",
+    "coordinates": "9.9820° N, 76.2900° E",
+    "type": "Historic Music Studio",
+    "description": "Established by legendary playback singer K.J. Yesudas, serving as a pioneer for high-quality recording in Kerala."
+  },
+  "Adyar_Studio": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0067° N, 80.2570° E",
+    "type": "Film Shooting Location",
+    "description": "A legacy outdoor and indoor shooting lot nestled along the Adyar river basin in Chennai."
+  },
+  "EVP_Film_City": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0400° N, 80.0800° E",
+    "type": "Extensive Film Lot",
+    "description": "A sprawling outdoor property on the outskirts of Chennai frequently used for stunt sequences and massive set constructions."
+  },
+  "Kalinga_Studio": {
+    "location": "Bhubaneswar, Odisha",
+    "coordinates": "20.2961° N, 85.8245° E",
+    "type": "Regional Film Studio",
+    "description": "The primary government-backed hub for Ollywood (Odia film industry) featuring dedicated outdoor backlots."
+  },
+  "Jyoti_Cine_Studio": {
+    "location": "Guwahati, Assam",
+    "coordinates": "26.1445° N, 91.7362° E",
+    "type": "Northeastern Film Studio",
+    "description": "A historical cornerstone for Assamese cinema development, encouraging local language storytelling."
+  },
+  "Chitranjali_Studio": {
+    "location": "Thiruvananthapuram, Kerala",
+    "coordinates": "8.4875° N, 76.9450° E",
+    "type": "Government Film Studio",
+    "description": "Operated by the Kerala State Film Development Corporation, offering scenic hills, editing bays, and shooting stages."
+  },
+  "Padmalaya_Studios": {
+    "location": "Hyderabad, Telangana",
+    "coordinates": "17.4350° N, 78.4300° E",
+    "type": "Classic Film Studio",
+    "description": "Founded by Telugu actor/producer G. Krishna Murthy, famous for indoor floors and iconic outdoor garden setups."
+  },
+  "Pogo_Studio": {
+    "location": "Kochi, Kerala",
+    "coordinates": "9.9312° N, 76.2673° E",
+    "type": "Indie Music Recording Studio",
+    "description": "An alternative, highly creative indie recording studio famous for raw acoustic tracking and experimental sound design."
+  },
+  "Suman_Recording_Studio": {
+    "location": "Patna, Bihar",
+    "coordinates": "25.5941° N, 85.1376° E",
+    "type": "Regional Audio House",
+    "description": "A foundational recording facility in Eastern India specializing in Bhojpuri, Maithili, and folk music production."
+  },
+  "Geethanjali_Studio": {
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": "13.0827° N, 80.2707° E",
+    "type": "Audio Dubbing & Mixing",
+    "description": "A dedicated facility focused on television serial audio post-production and regional commercial voice tracking."
+  }

@@ -1,0 +1,484 @@
+/* ==========================================================================
+   Sangeet: Music Intelligence Platform — Luxury White Glassmorphism Theme
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+    --bg-mesh-1: #e0e7ff;
+    --bg-mesh-2: #fce7f3;
+    --bg-mesh-3: #e0f2fe;
+    --bg-mesh-4: #fef3c7;
+    --bg-base: #f8fafc;
+
+    /* White Glass Surface Tokens */
+    --glass-card-bg: rgba(255, 255, 255, 0.78);
+    --glass-card-bg-hover: rgba(255, 255, 255, 0.94);
+    --glass-border: rgba(255, 255, 255, 0.92);
+    --glass-border-subtle: rgba(226, 232, 240, 0.85);
+    --glass-border-hover: rgba(99, 102, 241, 0.45);
+    --glass-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.07), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+    --glass-shadow-hover: 0 18px 40px -4px rgba(99, 102, 241, 0.16), 0 8px 18px -2px rgba(15, 23, 42, 0.06);
+    --glass-blur: blur(20px) saturate(190%);
+
+    /* Vibrant Brand Accents */
+    --accent-indigo: #4f46e5;
+    --accent-indigo-light: #6366f1;
+    --accent-purple: #7c3aed;
+    --accent-pink: #db2777;
+    --accent-teal: #0d9488;
+    --accent-amber: #f59e0b;
+    --accent-emerald: #059669;
+
+    /* High-contrast Typography Tokens */
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+
+    --radius-2xl: 22px;
+    --radius-xl: 18px;
+    --radius-lg: 14px;
+    --radius-md: 10px;
+    --radius-sm: 8px;
+    --radius-pill: 9999px;
+}
+
+/* Force Light Mode Unconditionally */
+html, body, [class*="css"], .stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stHeader"],
+[data-theme="dark"],
+[data-theme="light"] {
+    color-scheme: light !important;
+    background-color: var(--bg-base) !important;
+    background-image:
+        radial-gradient(at 0% 0%, var(--bg-mesh-1) 0px, transparent 55%),
+        radial-gradient(at 100% 8%, var(--bg-mesh-2) 0px, transparent 50%),
+        radial-gradient(at 45% 100%, var(--bg-mesh-3) 0px, transparent 55%),
+        radial-gradient(at 100% 90%, var(--bg-mesh-4) 0px, transparent 40%) !important;
+    background-attachment: fixed !important;
+    color: var(--text-primary) !important;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    letter-spacing: -0.01em;
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(241, 245, 249, 0.6);
+    border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.5);
+    border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.6);
+}
+
+/* Hide Default Sidebar Auto-Navigation */
+[data-testid="stSidebarNav"],
+ul[data-testid="stSidebarNavItems"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Headings with Deep Indigo/Slate Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    color: var(--text-primary) !important;
+}
+
+/* Sidebar: Frosted Pearl White Glass */
+[data-testid="stSidebar"] {
+    background: rgba(255, 255, 255, 0.84) !important;
+    backdrop-filter: blur(28px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+    border-right: 1px solid rgba(226, 232, 240, 0.85) !important;
+    box-shadow: 6px 0 28px rgba(99, 102, 241, 0.05) !important;
+}
+
+[data-testid="stSidebar"] hr {
+    border-color: rgba(203, 213, 225, 0.45) !important;
+    margin: 14px 0 !important;
+}
+
+/* Sidebar Branding Header */
+.sidebar-branding {
+    padding: 16px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    margin-bottom: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 247, 255, 0.8) 100%);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 18px rgba(99, 102, 241, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+
+.sidebar-branding .brand-title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sidebar-branding h2 {
+    background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: 0.03em;
+}
+
+.sidebar-branding small {
+    color: var(--accent-indigo);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 2px;
+}
+
+/* Sangeet Hero Banner: Premium Frosted Pearl Glass */
+.sangeet-hero {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 255, 0.88) 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: 24px 30px;
+    margin-bottom: 26px;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: var(--glass-shadow), inset 0 1px 2px rgba(255, 255, 255, 1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sangeet-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-indigo) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
+}
+
+.hero-header-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.hero-icon-badge {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(238, 242, 255, 0.95) 100%);
+    border: 1px solid rgba(224, 231, 255, 0.95);
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.14), inset 0 1px 2px rgba(255, 255, 255, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.hero-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hero-title-text {
+    margin: 0 !important;
+    font-size: 27px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+    background: linear-gradient(135deg, #0f172a 0%, #312e81 60%, #4f46e5 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    line-height: 1.22 !important;
+}
+
+.hero-subtitle {
+    margin: 0 !important;
+    color: var(--text-secondary) !important;
+    font-size: 14.5px !important;
+    font-weight: 500 !important;
+    line-height: 1.45 !important;
+}
+
+/* Glassmorphic Metric KPI Cards */
+.sangeet-kpi-card {
+    background: var(--glass-card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 18px 22px;
+    box-shadow: var(--glass-shadow), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sangeet-kpi-card:hover {
+    transform: translateY(-3px);
+    background: var(--glass-card-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-hover);
+}
+
+.sangeet-kpi-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.sangeet-kpi-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 4px;
+}
+
+/* Streamlit Native Metric Overrides */
+[data-testid="stMetric"] {
+    background: var(--glass-card-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 16px 20px !important;
+    box-shadow: var(--glass-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glass-shadow-hover) !important;
+    border-color: rgba(99, 102, 241, 0.35) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-muted) !important;
+    font-weight: 700 !important;
+    font-size: 11.5px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 27px !important;
+    font-weight: 800 !important;
+    color: #1e1b4b !important;
+    letter-spacing: -0.02em !important;
+}
+
+/* Song Card Component: White Frosted Glass */
+.song-card {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: var(--radius-lg);
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.035), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.song-card:hover {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(99, 102, 241, 0.45);
+    box-shadow: 0 8px 26px rgba(99, 102, 241, 0.14);
+    transform: translateX(4px);
+}
+
+/* Badges: Pastel White Glass Tags */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-weight: 700;
+    border-radius: 8px;
+    letter-spacing: 0.03em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.badge-genre {
+    background: rgba(99, 102, 241, 0.12);
+    color: #4338ca;
+    border: 1px solid rgba(99, 102, 241, 0.28);
+}
+
+.badge-hit {
+    background: rgba(244, 63, 94, 0.12);
+    color: #be123c;
+    border: 1px solid rgba(244, 63, 94, 0.28);
+}
+
+.badge-score {
+    background: rgba(16, 185, 129, 0.12);
+    color: #047857;
+    border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
+/* Buttons: Vibrant Gradient Pill Glass Style */
+button[kind="primary"], .stButton > button {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: #ffffff !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13.5px !important;
+    border-radius: var(--radius-pill) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    padding: 9px 22px !important;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3) !important;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+button[kind="primary"]:hover, .stButton > button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45) !important;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+}
+
+button[kind="primary"]:active, .stButton > button:active {
+    transform: translateY(0px) !important;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.35) !important;
+}
+
+.stDownloadButton > button {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%) !important;
+    color: #4338ca !important;
+    border: 1px solid rgba(99, 102, 241, 0.25) !important;
+    border-radius: var(--radius-pill) !important;
+    font-weight: 700 !important;
+    padding: 8px 20px !important;
+    box-shadow: 0 3px 12px rgba(99, 102, 241, 0.08) !important;
+    transition: all 0.2s ease !important;
+}
+
+.stDownloadButton > button:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Form Controls & Inputs: White Glass Inputs */
+input, textarea, [data-baseweb="input"], [data-baseweb="select"] {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+    border-radius: var(--radius-md) !important;
+    border-color: rgba(203, 213, 225, 0.9) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02) !important;
+    font-size: 14px !important;
+}
+
+input:focus, textarea:focus, [data-baseweb="input"]:focus-within {
+    border-color: var(--accent-indigo) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18) !important;
+    background-color: #ffffff !important;
+}
+
+/* Tabs: White Frosted Glass Tabs */
+[data-baseweb="tab-list"] {
+    background: rgba(241, 245, 249, 0.85) !important;
+    padding: 6px 8px !important;
+    border-radius: var(--radius-xl) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    backdrop-filter: blur(14px) !important;
+}
+
+[data-baseweb="tab"] {
+    border-radius: var(--radius-md) !important;
+    color: var(--text-secondary) !important;
+    font-weight: 600 !important;
+    font-size: 13.5px !important;
+    padding: 8px 18px !important;
+    transition: all 0.22s ease !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+[data-baseweb="tab"]:hover {
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"] {
+    background: #ffffff !important;
+    color: var(--accent-indigo) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Expanders */
+[data-testid="stExpander"] {
+    background: rgba(255, 255, 255, 0.78) !important;
+    border: 1px solid rgba(226, 232, 240, 0.88) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    overflow: hidden !important;
+}
+
+/* DataFrames */
+[data-testid="stDataFrame"] {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border-radius: var(--radius-lg) !important;
+    border: 1px solid rgba(226, 232, 240, 0.88) !important;
+    box-shadow: var(--glass-shadow) !important;
+    overflow: hidden !important;
+}
+
+/* Audio Player Clean Glass Styling */
+audio {
+    border-radius: var(--radius-pill) !important;
+    height: 38px !important;
+    width: 100% !important;
+    outline: none !important;
+    background: rgba(248, 250, 252, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.08) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+}
+
+/* Chat Message Styling */
+[data-testid="stChatMessage"] {
+    background: rgba(255, 255, 255, 0.82) !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 14px 18px !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03) !important;
+    backdrop-filter: blur(14px) !important;
+    margin-bottom: 12px !important;
+}
+
