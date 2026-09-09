@@ -59,11 +59,22 @@ modules = {
 
 
 with st.sidebar:
-    st.markdown("### 🧭 Platform Modules")
+    st.markdown("""
+        <div class="sidebar-modules-header">
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.12em; color: #4338ca; text-transform: uppercase;">🧭 Platform Modules</span>
+            <span class="modules-live-tag">LIVE</span>
+        </div>
+    """, unsafe_allow_html=True)
     for mod in modules.keys():
-        st.markdown(f"<div style='padding: 4px 0; font-size: 0.95rem; font-weight: 500;'>{mod}</div>", unsafe_allow_html=True)
-    st.markdown("---")
-    st.info("💡 **White Glass Edition**: live catalog metrics are shown on the Dashboard.")
+        st.markdown(
+            f"""
+            <div class="sidebar-nav-pill">
+                <span class="nav-pill-text">{mod}</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
 
 # Main Application Tabs Navigation
 tabs = st.tabs(list(modules.keys()))

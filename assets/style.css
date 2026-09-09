@@ -112,45 +112,287 @@ h1, h2, h3, h4, h5, h6 {
     margin: 14px 0 !important;
 }
 
-/* Sidebar Branding Header */
+/* Sidebar Branding Header — Animated Luxury Glass */
 .sidebar-branding {
-    padding: 16px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.95);
-    margin-bottom: 20px;
+    padding: 18px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.96);
+    margin-bottom: 22px;
     text-align: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 247, 255, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 255, 0.9) 100%);
     border-radius: var(--radius-lg);
-    box-shadow: 0 4px 18px rgba(99, 102, 241, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1);
+    box-shadow: 0 6px 24px -4px rgba(99, 102, 241, 0.12), inset 0 1px 2px rgba(255, 255, 255, 1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sidebar-branding:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -4px rgba(99, 102, 241, 0.22), inset 0 1px 2px rgba(255, 255, 255, 1);
+    border-color: rgba(99, 102, 241, 0.35);
+}
+
+.brand-glow-backdrop {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    animation: ambient-orb-rotate 14s linear infinite;
+}
+
+@keyframes ambient-orb-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .sidebar-branding .brand-title-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Animated Music Icon Container */
+.brand-icon-animated {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: brand-icon-float 4.2s ease-in-out infinite;
+    filter: drop-shadow(0 3px 10px rgba(124, 58, 237, 0.3));
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.sidebar-branding:hover .brand-icon-animated {
+    transform: translate3d(0, 0, 0) scale(1.1) rotate(5deg);
+}
+
+@keyframes brand-icon-float {
+    0%, 100% {
+        transform: translate3d(0, 0px, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(0, -3.5px, 0) rotate(2.5deg);
+    }
+}
+
+.brand-music-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(124, 58, 237, 0.3);
+    animation: ring-spin 12s linear infinite;
+    pointer-events: none;
+    will-change: transform;
+}
+
+@keyframes ring-spin {
+    from { transform: rotate(0deg) translateZ(0); }
+    to { transform: rotate(360deg) translateZ(0); }
+}
+
+/* SANGEET Title Animated Gradient Wave */
+.sidebar-branding h2.sangeet-animated-title,
 .sidebar-branding h2 {
-    background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #7c3aed 100%);
+    background: linear-gradient(
+        90deg,
+        #1e1b4b 0%,
+        #4338ca 20%,
+        #7c3aed 40%,
+        #db2777 60%,
+        #4338ca 80%,
+        #1e1b4b 100%
+    );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 900;
     margin: 0;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
+    animation: sangeet-text-shimmer 5.5s ease-in-out infinite;
+    filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.15));
 }
 
-.sidebar-branding small {
-    color: var(--accent-indigo);
-    font-size: 11px;
-    font-weight: 700;
+@keyframes sangeet-text-shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Subtitle Pill Badge with Live Pulse and Equalizer */
+.brand-subtitle-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    padding: 4px 12px;
+    border-radius: 9999px;
+    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sidebar-branding:hover .brand-subtitle-badge {
+    background: rgba(99, 102, 241, 0.14);
+    border-color: rgba(99, 102, 241, 0.35);
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.15);
+}
+
+.brand-live-pulse {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #10b981;
+    animation: live-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes live-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.45;
+        transform: scale(0.85);
+    }
+}
+
+.brand-subtitle-badge small {
+    color: #4338ca;
+    font-size: 10.5px;
+    font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     display: inline-block;
-    margin-top: 2px;
+    margin: 0;
 }
 
-/* Sangeet Hero Banner: Premium Frosted Pearl Glass */
+.brand-mini-bars {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 10px;
+}
+
+.brand-mini-bars span {
+    width: 2px;
+    height: 10px;
+    background: #6366f1;
+    border-radius: 1px;
+    transform-origin: bottom center;
+    animation: brand-bars-bounce 1.3s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    will-change: transform;
+}
+
+.brand-mini-bars span:nth-child(1) { animation-delay: 0.12s; }
+.brand-mini-bars span:nth-child(2) { animation-delay: 0.4s; }
+.brand-mini-bars span:nth-child(3) { animation-delay: 0.24s; }
+
+@keyframes brand-bars-bounce {
+    0% { transform: scaleY(0.25); }
+    50% { transform: scaleY(0.9); }
+    100% { transform: scaleY(0.4); }
+}
+
+/* Sidebar Module Navigation Pills */
+.sidebar-modules-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 0 4px;
+}
+
+.modules-live-tag {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 9999px;
+    letter-spacing: 0.08em;
+    animation: live-pulse 2.2s infinite;
+}
+
+.sidebar-nav-pill {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(226, 232, 240, 0.88);
+    border-radius: 12px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-nav-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+    transform: translate3d(-130%, 0, 0);
+    animation: global-btn-sheen 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.sidebar-nav-pill:hover {
+    transform: translate3d(5px, 0, 0);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 247, 255, 0.95) 100%);
+    border-color: rgba(99, 102, 241, 0.45);
+    box-shadow: 0 6px 20px -2px rgba(99, 102, 241, 0.18), inset 0 1px 1px #ffffff;
+}
+
+.nav-pill-num {
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+    color: #4f46e5;
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    flex-shrink: 0;
+}
+
+.nav-pill-text {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Sangeet Hero Banner: Premium Frosted Pearl Glass with Spotify-style Breathing Aura */
 .sangeet-hero {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 255, 0.88) 100%);
     border: 1px solid var(--glass-border);
@@ -162,7 +404,22 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: var(--glass-shadow), inset 0 1px 2px rgba(255, 255, 255, 1);
     position: relative;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    animation: hero-glow-pulse 5.5s ease-in-out infinite;
+}
+
+@keyframes hero-glow-pulse {
+    0%, 100% {
+        box-shadow: var(--glass-shadow), inset 0 1px 2px rgba(255, 255, 255, 1);
+    }
+    50% {
+        box-shadow: 0 14px 38px -4px rgba(99, 102, 241, 0.16), 0 0 16px rgba(124, 58, 237, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1);
+    }
+}
+
+.sangeet-hero:hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow: var(--glass-shadow-hover), 0 0 18px rgba(99, 102, 241, 0.12), inset 0 1px 2px rgba(255, 255, 255, 1);
 }
 
 .sangeet-hero::before {
@@ -172,7 +429,15 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 6px;
     height: 100%;
-    background: linear-gradient(180deg, var(--accent-indigo) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
+    background: linear-gradient(180deg, var(--accent-indigo) 0%, var(--accent-purple) 35%, var(--accent-pink) 70%, var(--accent-amber) 100%);
+    background-size: 100% 200%;
+    animation: rainbow-border-glow 6s linear infinite;
+}
+
+@keyframes rainbow-border-glow {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
 }
 
 .hero-header-row {
@@ -193,6 +458,12 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    animation: hero-icon-hover-bob 4s ease-in-out infinite;
+}
+
+@keyframes hero-icon-hover-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
 }
 
 .hero-text-col {
@@ -206,10 +477,17 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 27px !important;
     font-weight: 800 !important;
     letter-spacing: -0.025em !important;
-    background: linear-gradient(135deg, #0f172a 0%, #312e81 60%, #4f46e5 100%) !important;
+    background: linear-gradient(135deg, #0f172a 0%, #312e81 40%, #4f46e5 75%, #0f172a 100%) !important;
+    background-size: 200% auto !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     line-height: 1.22 !important;
+    animation: hero-title-shimmer 6s ease-in-out infinite !important;
+}
+
+@keyframes hero-title-shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .hero-subtitle {
@@ -257,7 +535,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 4px;
 }
 
-/* Streamlit Native Metric Overrides */
+/* Streamlit Native Metric Overrides with Spotify-Style Pulse & Sheen */
 [data-testid="stMetric"] {
     background: var(--glass-card-bg) !important;
     border: 1px solid var(--glass-border) !important;
@@ -266,14 +544,56 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: var(--glass-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: var(--glass-blur) !important;
     -webkit-backdrop-filter: var(--glass-blur) !important;
-    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    animation: metric-card-pulse 4.8s ease-in-out infinite !important;
+}
+
+@keyframes metric-card-pulse {
+    0%, 100% {
+        box-shadow: var(--glass-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+    }
+    50% {
+        box-shadow: 0 10px 30px -4px rgba(99, 102, 241, 0.14), inset 0 1px 2px #ffffff;
+    }
+}
+
+[data-testid="stMetric"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5px;
+    background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+    opacity: 0.85;
+}
+
+[data-testid="stMetric"]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: translate3d(-140%, 0, 0);
+    animation: card-sheen 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+    will-change: transform;
+}
+
+@keyframes card-sheen {
+    0%, 65% { transform: translate3d(-140%, 0, 0); }
+    100% { transform: translate3d(140%, 0, 0); }
 }
 
 [data-testid="stMetric"]:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--glass-shadow-hover) !important;
-    border-color: rgba(99, 102, 241, 0.35) !important;
-    background: rgba(255, 255, 255, 0.92) !important;
+    transform: translate3d(0, -4px, 0) scale(1.01) !important;
+    box-shadow: 0 16px 36px -4px rgba(99, 102, 241, 0.2), 0 0 14px rgba(99, 102, 241, 0.08), inset 0 1px 2px #ffffff !important;
+    border-color: rgba(99, 102, 241, 0.4) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
 }
 
 [data-testid="stMetricLabel"] {
@@ -286,15 +606,17 @@ h1, h2, h3, h4, h5, h6 {
 
 [data-testid="stMetricValue"] {
     font-family: 'Outfit', sans-serif !important;
-    font-size: 27px !important;
+    font-size: 28px !important;
     font-weight: 800 !important;
-    color: #1e1b4b !important;
+    background: linear-gradient(135deg, #0f172a 0%, #312e81 60%, #4338ca 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
     letter-spacing: -0.02em !important;
 }
 
-/* Song Card Component: White Frosted Glass */
+/* Song Card Component: White Frosted Glass with Sheen */
 .song-card {
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.84);
     border: 1px solid rgba(226, 232, 240, 0.9);
     border-radius: var(--radius-lg);
     padding: 15px 20px;
@@ -302,17 +624,245 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 18px rgba(15, 23, 42, 0.035), inset 0 1px 1px rgba(255, 255, 255, 0.95);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.song-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: translate3d(-140%, 0, 0);
+    animation: card-sheen 6.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+    will-change: transform;
 }
 
 .song-card:hover {
     background: rgba(255, 255, 255, 0.98);
     border-color: rgba(99, 102, 241, 0.45);
-    box-shadow: 0 8px 26px rgba(99, 102, 241, 0.14);
-    transform: translateX(4px);
+    box-shadow: 0 10px 28px rgba(99, 102, 241, 0.16), 0 0 12px rgba(124, 58, 237, 0.08);
+    transform: translate3d(4px, -2px, 0);
+}
+
+/* =========================================================
+   Artist Pop-Up Card & Animated Live Mic Badge (Ultra-Smooth)
+   ========================================================= */
+.artist-card {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    border-radius: var(--radius-lg);
+    padding: 13px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.035), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, box-shadow, border-color, background;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.35s ease, 
+                background 0.35s ease;
+    animation: artist-card-popin 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Stagger entrance animations */
+.artist-card:nth-child(1) { animation-delay: 0.02s; }
+.artist-card:nth-child(2) { animation-delay: 0.05s; }
+.artist-card:nth-child(3) { animation-delay: 0.08s; }
+.artist-card:nth-child(4) { animation-delay: 0.11s; }
+.artist-card:nth-child(5) { animation-delay: 0.14s; }
+.artist-card:nth-child(6) { animation-delay: 0.17s; }
+.artist-card:nth-child(7) { animation-delay: 0.20s; }
+.artist-card:nth-child(8) { animation-delay: 0.23s; }
+
+@keyframes artist-card-popin {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 14px, 0) scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+/* Silky soft light sweep across card on hover */
+.artist-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+    transform: translate3d(-150%, 0, 0) skewX(-20deg);
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.artist-card:hover::after {
+    transform: translate3d(260%, 0, 0) skewX(-20deg);
+}
+
+.artist-card:hover {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(99, 102, 241, 0.45);
+    box-shadow: 0 12px 32px -4px rgba(99, 102, 241, 0.16), 0 4px 16px -2px rgba(168, 85, 247, 0.1), inset 0 1px 2px rgba(255, 255, 255, 1);
+    transform: translate3d(0, -5px, 0) scale(1.012);
+}
+
+.artist-card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Mic Logo Popup Badge */
+.mic-popup-badge {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(168, 85, 247, 0.18) 100%);
+    border: 1.5px solid rgba(99, 102, 241, 0.25);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, box-shadow, background, border-color;
+    transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                background 0.4s ease,
+                border-color 0.4s ease,
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dual Audio wave / radar pulse rings around mic */
+.mic-wave-ring {
+    position: absolute;
+    inset: -3px;
+    border-radius: 16px;
+    border: 1.5px solid rgba(99, 102, 241, 0.38);
+    opacity: 0;
+    pointer-events: none;
+    animation: mic-wave-pulse 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.mic-wave-ring.ring-2 {
+    animation-delay: 1.5s;
+    border-color: rgba(236, 72, 153, 0.32);
+}
+
+@keyframes mic-wave-pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+    60% {
+        transform: scale(1.32);
+        opacity: 0.15;
+    }
+    100% {
+        transform: scale(1.45);
+        opacity: 0;
+    }
+}
+
+/* The Mic Icon Pop effect */
+.mic-popup-icon {
+    font-size: 21px;
+    line-height: 1;
+    display: inline-block;
+    filter: drop-shadow(0 2px 5px rgba(99, 102, 241, 0.22));
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, filter;
+    transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                filter 0.4s ease;
+    animation: mic-gentle-float 4s ease-in-out infinite;
+}
+
+@keyframes mic-gentle-float {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(0, -2.5px, 0) scale(1.05) rotate(-2deg);
+    }
+}
+
+/* Smooth Two-Way Pop on Hover (No snapping, fluid return) */
+.artist-card:hover .mic-popup-badge {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4), 0 0 16px rgba(236, 72, 153, 0.3);
+    transform: translate3d(0, -2px, 0) scale(1.1) rotate(3deg);
+}
+
+.artist-card:hover .mic-popup-icon {
+    transform: translate3d(0, -3px, 0) scale(1.25) rotate(-10deg);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+.artist-card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.artist-card-title {
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: color 0.35s ease, transform 0.35s ease;
+}
+
+.artist-card:hover .artist-card-title {
+    color: #4f46e5;
+    transform: translate3d(2px, 0, 0);
+}
+
+.artist-card-meta {
+    color: #64748b;
+    font-weight: 500;
+    font-size: 12.5px;
+    margin-top: 3px;
+    transition: color 0.35s ease;
+}
+
+.artist-card:hover .artist-card-meta {
+    color: #475569;
+}
+
+/* Badge hover pop */
+.artist-badge-pop {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.4s ease, 
+                background 0.3s ease !important;
+}
+
+.artist-card:hover .artist-badge-pop {
+    transform: translate3d(0, -2px, 0) scale(1.08);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.32);
+    background: rgba(16, 185, 129, 0.2) !important;
 }
 
 /* Badges: Pastel White Glass Tags */
@@ -346,64 +896,147 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid rgba(16, 185, 129, 0.28);
 }
 
-/* Buttons: Vibrant Gradient Pill Glass Style */
+/* Buttons: Ultra-Cool Animated Vibrant Pill Glass with Spotify-Style Pulse & Sheen */
 button[kind="primary"], .stButton > button {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #6366f1 100%) !important;
     color: #ffffff !important;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-weight: 700 !important;
     font-size: 13.5px !important;
     border-radius: var(--radius-pill) !important;
     border: 1px solid rgba(255, 255, 255, 0.35) !important;
-    padding: 9px 22px !important;
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3) !important;
-    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 10px 24px !important;
+    box-shadow: 0 4px 18px rgba(99, 102, 241, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    animation: sangeet-btn-pulse 3.8s ease-in-out infinite !important;
+    will-change: transform, box-shadow !important;
+    backface-visibility: hidden !important;
+}
+
+@keyframes sangeet-btn-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 16px rgba(99, 102, 241, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 4px 24px rgba(124, 58, 237, 0.58), 0 0 14px rgba(219, 39, 119, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    }
+}
+
+button[kind="primary"]::before, .stButton > button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: translate3d(-130%, 0, 0);
+    animation: global-btn-sheen 4.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+}
+
+@keyframes global-btn-sheen {
+    0%, 60% { transform: translate3d(-130%, 0, 0); }
+    100% { transform: translate3d(130%, 0, 0); }
 }
 
 button[kind="primary"]:hover, .stButton > button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45) !important;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+    transform: translate3d(0, -2.5px, 0) scale(1.025) !important;
+    box-shadow: 0 8px 28px rgba(99, 102, 241, 0.52), 0 0 16px rgba(124, 58, 237, 0.38) !important;
+    background: linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #4f46e5 100%) !important;
 }
 
 button[kind="primary"]:active, .stButton > button:active {
-    transform: translateY(0px) !important;
-    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.35) !important;
+    transform: translate3d(0, 0, 0) scale(0.98) !important;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3) !important;
 }
 
+/* Download Button with Spotify-style Sheen & Glow */
 .stDownloadButton > button {
-    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%) !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
     color: #4338ca !important;
-    border: 1px solid rgba(99, 102, 241, 0.25) !important;
+    border: 1px solid rgba(99, 102, 241, 0.3) !important;
     border-radius: var(--radius-pill) !important;
     font-weight: 700 !important;
-    padding: 8px 20px !important;
-    box-shadow: 0 3px 12px rgba(99, 102, 241, 0.08) !important;
-    transition: all 0.2s ease !important;
+    padding: 9px 22px !important;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.1) !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    animation: download-btn-pulse 4.2s ease-in-out infinite !important;
+    will-change: transform, box-shadow !important;
+}
+
+@keyframes download-btn-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.1);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.28), 0 0 10px rgba(99, 102, 241, 0.15);
+    }
+}
+
+.stDownloadButton > button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+    transform: translate3d(-130%, 0, 0);
+    animation: global-btn-sheen 4.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+    pointer-events: none;
 }
 
 .stDownloadButton > button:hover {
     background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
     color: #ffffff !important;
+    transform: translate3d(0, -2px, 0) scale(1.025) !important;
     border-color: rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.3) !important;
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.38), 0 0 12px rgba(124, 58, 237, 0.2) !important;
 }
 
-/* Form Controls & Inputs: White Glass Inputs */
-input, textarea, [data-baseweb="input"], [data-baseweb="select"] {
-    background-color: rgba(255, 255, 255, 0.92) !important;
-    border-radius: var(--radius-md) !important;
-    border-color: rgba(203, 213, 225, 0.9) !important;
+/* Form Controls & Inputs: Frosted Glass (excluding stChatInput) */
+input:not([data-testid="stChatInput"] *), 
+textarea:not([data-testid="stChatInput"] *):not(.stChatInput *), 
+[data-baseweb="input"]:not([data-testid="stChatInput"] *), 
+[data-baseweb="select"] {
+    background-color: rgba(255, 255, 255, 0.88) !important;
+    border-radius: 12px !important;
+    border: 1.5px solid rgba(203, 213, 225, 0.85) !important;
     color: var(--text-primary) !important;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
     font-size: 14px !important;
+    transition: all 0.25s ease !important;
 }
 
-input:focus, textarea:focus, [data-baseweb="input"]:focus-within {
+input:not([data-testid="stChatInput"] *):focus, 
+textarea:not([data-testid="stChatInput"] *):not(.stChatInput *):focus, 
+[data-baseweb="input"]:not([data-testid="stChatInput"] *):focus-within {
     border-color: var(--accent-indigo) !important;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18) !important;
+    box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.2), 0 4px 16px rgba(99, 102, 241, 0.12) !important;
     background-color: #ffffff !important;
 }
+
+/* Sliders: Perfectly Centered Glowing Thumb on Track */
+[data-testid="stSlider"] [role="slider"] {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.45) !important;
+    border: 2.5px solid #ffffff !important;
+    transition: box-shadow 0.2s ease !important;
+}
+
+[data-testid="stSlider"] [role="slider"]:hover,
+[data-testid="stSlider"] [role="slider"]:focus,
+[data-testid="stSlider"] [role="slider"]:active {
+    box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.22), 0 3px 12px rgba(124, 58, 237, 0.5) !important;
+}
+
 
 /* Tabs: White Frosted Glass Tabs */
 [data-baseweb="tab-list"] {
@@ -415,6 +1048,12 @@ input:focus, textarea:focus, [data-baseweb="input"]:focus-within {
     overflow-x: auto !important;
     white-space: nowrap !important;
     backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    margin-bottom: 22px !important;
+}
+
+[data-baseweb="tab-list"]::-webkit-scrollbar {
+    height: 4px;
 }
 
 [data-baseweb="tab"] {
@@ -440,45 +1079,418 @@ input:focus, textarea:focus, [data-baseweb="input"]:focus-within {
     box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08) !important;
 }
 
+/* Alert Callout Cards: Glassmorphism */
+[data-testid="stAlert"] {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 14px !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04) !important;
+    border-left-width: 5px !important;
+    transition: all 0.25s ease !important;
+}
+
+[data-testid="stAlert"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08) !important;
+}
+
 /* Expanders */
 [data-testid="stExpander"] {
-    background: rgba(255, 255, 255, 0.78) !important;
-    border: 1px solid rgba(226, 232, 240, 0.88) !important;
+    background: rgba(255, 255, 255, 0.82) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
     border-radius: var(--radius-lg) !important;
-    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03) !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.035) !important;
     backdrop-filter: var(--glass-blur) !important;
     -webkit-backdrop-filter: var(--glass-blur) !important;
     overflow: hidden !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-testid="stExpander"]:hover {
+    border-color: rgba(99, 102, 241, 0.35) !important;
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.09) !important;
 }
 
 /* DataFrames */
 [data-testid="stDataFrame"] {
-    background: rgba(255, 255, 255, 0.88) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
     border-radius: var(--radius-lg) !important;
-    border: 1px solid rgba(226, 232, 240, 0.88) !important;
+    border: 1px solid rgba(226, 232, 240, 0.92) !important;
     box-shadow: var(--glass-shadow) !important;
     overflow: hidden !important;
+    transition: all 0.25s ease !important;
+}
+
+[data-testid="stDataFrame"]:hover {
+    box-shadow: var(--glass-shadow-hover) !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
 }
 
 /* Audio Player Clean Glass Styling */
 audio {
     border-radius: var(--radius-pill) !important;
-    height: 38px !important;
+    height: 40px !important;
     width: 100% !important;
     outline: none !important;
     background: rgba(248, 250, 252, 0.95) !important;
-    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.08) !important;
-    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 3px 12px rgba(99, 102, 241, 0.1) !important;
+    border: 1.5px solid rgba(226, 232, 240, 0.95) !important;
+    transition: all 0.25s ease !important;
+}
+
+audio:hover {
+    border-color: rgba(99, 102, 241, 0.35) !important;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15) !important;
 }
 
 /* Chat Message Styling */
 [data-testid="stChatMessage"] {
-    background: rgba(255, 255, 255, 0.82) !important;
-    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(226, 232, 240, 0.88) !important;
     border-radius: var(--radius-lg) !important;
     padding: 14px 18px !important;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03) !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.035) !important;
     backdrop-filter: blur(14px) !important;
     margin-bottom: 12px !important;
+    transition: all 0.25s ease !important;
 }
+
+[data-testid="stChatMessage"]:hover {
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08) !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* ==========================================================================
+   Chat Input Styling (Clean White Glass Pill — Fix Double Borders)
+   ========================================================================== */
+[data-testid="stBottom"],
+[data-testid="stBottom"] > div {
+    background: transparent !important;
+}
+
+[data-testid="stChatInput"],
+.stChatInput {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 8px 0 !important;
+}
+
+/* Outer Unified Capsule Container */
+[data-testid="stChatInput"] > div,
+.stChatInput > div,
+[data-testid="stChatInput"] [data-baseweb="base-input"] {
+    background: rgba(255, 255, 255, 0.94) !important;
+    border: 1.5px solid rgba(203, 213, 225, 0.9) !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    padding: 4px 8px 4px 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+
+[data-testid="stChatInput"] > div:hover,
+.stChatInput > div:hover {
+    border-color: rgba(99, 102, 241, 0.5) !important;
+    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.1), inset 0 1px 2px #fff !important;
+}
+
+[data-testid="stChatInput"] > div:focus-within,
+.stChatInput > div:focus-within,
+[data-testid="stChatInput"] [data-baseweb="base-input"]:focus-within {
+    border-color: #6366f1 !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.18), 0 8px 30px rgba(99, 102, 241, 0.14), inset 0 1px 2px #fff !important;
+}
+
+/* Remove ALL inner textarea borders, backgrounds and outlines */
+[data-testid="stChatInput"] textarea,
+.stChatInput textarea,
+[data-testid="stChatInputTextArea"] textarea,
+[data-testid="stChatInput"] div[data-baseweb="base-input"] textarea {
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 10px 8px !important;
+    font-size: 14.5px !important;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+    color: #0f172a !important;
+    line-height: 1.5 !important;
+    resize: none !important;
+}
+
+[data-testid="stChatInput"] textarea:focus,
+.stChatInput textarea:focus,
+[data-testid="stChatInput"] textarea:active,
+[data-testid="stChatInput"] [data-baseweb="base-input"]:focus {
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+[data-testid="stChatInput"] textarea::placeholder,
+.stChatInput textarea::placeholder {
+    color: #94a3b8 !important;
+    font-weight: 400 !important;
+    opacity: 0.9 !important;
+}
+
+/* Submit Send Button: Circular / Rounded Gradient Action */
+[data-testid="stChatInputSubmitButton"],
+[data-testid="stChatInput"] button {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+    color: #ffffff !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer !important;
+    margin: 2px 2px 2px 6px !important;
+    padding: 0 !important;
+    animation: none !important;
+}
+
+[data-testid="stChatInputSubmitButton"]:hover,
+[data-testid="stChatInput"] button:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.5) !important;
+    background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%) !important;
+}
+
+[data-testid="stChatInputSubmitButton"] svg,
+[data-testid="stChatInput"] button svg {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+    color: #ffffff !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+
+/* Disabled Send Button */
+[data-testid="stChatInputSubmitButton"]:disabled,
+[data-testid="stChatInput"] button:disabled {
+    background: rgba(226, 232, 240, 0.8) !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    opacity: 0.65 !important;
+}
+
+[data-testid="stChatInputSubmitButton"]:disabled svg,
+[data-testid="stChatInput"] button:disabled svg {
+    fill: #94a3b8 !important;
+    stroke: #94a3b8 !important;
+    color: #94a3b8 !important;
+}
+
+/* ==========================================================================
+   Cool Animated Spotify Button & Master Preview Meta Strip
+   ========================================================================== */
+.spotify-meta-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(248, 250, 252, 0.75) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+    transition: all 0.25s ease;
+}
+
+.spotify-meta-strip:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.08);
+}
+
+.spotify-track-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    overflow: hidden;
+    flex: 1;
+    min-width: 220px;
+}
+
+.spotify-track-badge {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: #ffffff;
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.22);
+    flex-shrink: 0;
+}
+
+.spotify-track-name {
+    font-weight: 700;
+    color: #0f172a;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.spotify-track-sep {
+    color: #cbd5e1;
+    font-size: 11px;
+}
+
+.spotify-artist-name {
+    color: #475569;
+    font-weight: 500;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.spotify-bpm-pill,
+.spotify-key-pill {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 1px 7px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #475569;
+    flex-shrink: 0;
+}
+
+/* The Cool Animated Spotify Button */
+.spotify-animated-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #1ed760 0%, #1db954 100%);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 7px 16px;
+    border-radius: 9999px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease;
+    box-shadow: 0 4px 14px rgba(29, 185, 84, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    flex-shrink: 0;
+    animation: spotify-btn-pulse 3.8s ease-in-out infinite;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+}
+
+@keyframes spotify-btn-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 14px rgba(29, 185, 84, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(29, 185, 84, 0.55), 0 0 10px rgba(30, 215, 96, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    }
+}
+
+.spotify-animated-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: translate3d(-130%, 0, 0);
+    animation: spotify-sheen 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+}
+
+@keyframes spotify-sheen {
+    0%, 60% { transform: translate3d(-130%, 0, 0); }
+    100% { transform: translate3d(130%, 0, 0); }
+}
+
+.spotify-animated-btn:hover {
+    transform: translate3d(0, -2px, 0) scale(1.03);
+    background: linear-gradient(135deg, #22e668 0%, #1db954 100%);
+    box-shadow: 0 8px 24px rgba(29, 185, 84, 0.5), 0 0 12px rgba(30, 215, 96, 0.38) !important;
+    color: #ffffff !important;
+}
+
+.spotify-animated-btn:active {
+    transform: translate3d(0, 0, 0) scale(0.97);
+}
+
+.spotify-btn-icon {
+    display: block;
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.spotify-animated-btn:hover .spotify-btn-icon {
+    transform: rotate(12deg) scale(1.12);
+}
+
+.spotify-btn-label {
+    display: inline-block;
+    line-height: 1;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Live Equalizer soundwave inside Spotify button — Zero-reflow GPU scaleY */
+.spotify-soundwave {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 12px;
+    margin-left: 2px;
+}
+
+.spotify-soundwave .sw-bar {
+    width: 2.2px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 1px;
+    transform-origin: bottom center;
+    animation: spotify-eq 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    will-change: transform;
+}
+
+.spotify-soundwave .sw-1 { animation-delay: 0.1s; }
+.spotify-soundwave .sw-2 { animation-delay: 0.35s; }
+.spotify-soundwave .sw-3 { animation-delay: 0.22s; }
+
+@keyframes spotify-eq {
+    0% { transform: scaleY(0.25); }
+    50% { transform: scaleY(1); }
+    100% { transform: scaleY(0.35); }
+}
+
 

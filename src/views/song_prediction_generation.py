@@ -23,63 +23,55 @@ def _inject_subtab_styles():
     """Apply premium styles to Tab 7 sub-tabs and controls."""
     st.markdown("""
     <style>
-    /* Tab 7 Sub-tabs styling */
-    div[data-testid="stTabs"] > div[role="tablist"] {
-        background: rgba(241, 245, 249, 0.7) !important;
-        padding: 6px 8px !important;
-        border-radius: 16px !important;
-        border: 1px solid rgba(226, 232, 240, 0.9) !important;
-        gap: 6px !important;
-        backdrop-filter: blur(12px) !important;
-        margin-bottom: 20px !important;
-    }
 
-    div[data-testid="stTabs"] button[role="tab"] {
-        border-radius: 12px !important;
-        font-weight: 600 !important;
-        font-size: 0.92rem !important;
-        padding: 8px 18px !important;
-        color: #475569 !important;
-        background: transparent !important;
-        border: none !important;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
-
-    div[data-testid="stTabs"] button[role="tab"]:hover {
-        color: #1e293b !important;
-        background: rgba(255, 255, 255, 0.75) !important;
-    }
-
-    div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
-        color: #ffffff !important;
-        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
-        box-shadow: 0 4px 14px -2px rgba(79, 70, 229, 0.4) !important;
-    }
-
-    /* Studio Card Panels */
+    /* Studio Card Panels with Sheen */
     .studio-panel {
-        background: rgba(255, 255, 255, 0.82);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
         border: 1px solid rgba(255, 255, 255, 0.95);
-        border-radius: 18px;
-        padding: 22px 26px;
-        box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
-        margin-bottom: 20px;
+        border-radius: 20px;
+        padding: 24px 28px;
+        box-shadow: 0 12px 36px -5px rgba(99, 102, 241, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03), inset 0 1px 2px #fff;
+        margin-bottom: 22px;
+        transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .studio-panel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transform: translate3d(-140%, 0, 0);
+        animation: card-sheen 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        pointer-events: none;
+        will-change: transform;
+    }
+
+    .studio-panel:hover {
+        transform: translate3d(0, -2px, 0);
+        box-shadow: 0 18px 42px -4px rgba(99, 102, 241, 0.16), inset 0 1px 2px #fff;
+        border-color: rgba(99, 102, 241, 0.3);
     }
 
     .studio-panel-title {
-        font-size: 1.05rem;
-        font-weight: 700;
+        font-size: 1.08rem;
+        font-weight: 800;
         color: #0f172a;
         margin-bottom: 4px;
         display: flex;
         align-items: center;
         gap: 8px;
+        letter-spacing: -0.01em;
     }
 
     .studio-panel-subtitle {
-        font-size: 0.85rem;
+        font-size: 0.86rem;
         color: #64748b;
         margin-bottom: 16px;
     }
@@ -90,11 +82,12 @@ def _inject_subtab_styles():
         gap: 6px;
         font-size: 0.82rem;
         color: #059669;
-        font-weight: 600;
+        font-weight: 700;
         background: #ecfdf5;
-        border: 1px solid rgba(5, 150, 105, 0.15);
-        padding: 4px 12px;
+        border: 1px solid rgba(5, 150, 105, 0.25);
+        padding: 4px 14px;
         border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(5, 150, 105, 0.12);
     }
     </style>
     """, unsafe_allow_html=True)

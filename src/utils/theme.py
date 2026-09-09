@@ -197,15 +197,25 @@ def apply_sangeet_theme(page_title: str = "Sangeet — Music Intelligence Platfo
                 </script>
             """)
 
-    # Render Persistent Frosted Glass Sidebar Branding with Gradient SVG Logo (never black)
+    # Render Persistent Frosted Glass Sidebar Branding with Dynamic Shimmer & Icon Animations
     with st.sidebar:
         st.markdown(f"""
             <div class="sidebar-branding">
+                <div class="brand-glow-backdrop"></div>
                 <div class="brand-title-wrap">
-                    {get_svg_icon_html('music', 30)}
-                    <h2>SANGEET</h2>
+                    <div class="brand-icon-animated">
+                        {get_svg_icon_html('music', 32)}
+                        <span class="brand-music-ring"></span>
+                    </div>
+                    <h2 class="sangeet-animated-title">SANGEET</h2>
                 </div>
-                <small>MUSIC INTELLIGENCE PLATFORM</small>
+                <div class="brand-subtitle-badge">
+                    <span class="brand-live-pulse"></span>
+                    <small>MUSIC INTELLIGENCE PLATFORM</small>
+                    <span class="brand-mini-bars">
+                        <span></span><span></span><span></span>
+                    </span>
+                </div>
             </div>
         """, unsafe_allow_html=True)
 

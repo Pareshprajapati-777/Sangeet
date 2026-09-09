@@ -45,21 +45,11 @@ def _render_music_artist_classifier_tab():
         st.session_state.music_artist_service = MusicArtistClassifierService()
     service = st.session_state.music_artist_service
 
-    sample_dict = service.get_sample_artists()
-
-    col_up, col_preset = st.columns([3, 2])
-    with col_up:
-        uploaded_file = st.file_uploader(
-            "Upload any music artist portrait or photo (JPG, PNG, WEBP):",
-            type=["jpg", "jpeg", "png", "webp"],
-            key="music_artist_upload_file",
-        )
-    with col_preset:
-        preset_choice = st.selectbox(
-            "📋 Or test with a sample music artist portrait:",
-            ["— Choose a sample music artist —"] + list(sample_dict.keys()),
-            key="music_artist_sample_select",
-        )
+    uploaded_file = st.file_uploader(
+        "Upload any music artist portrait or photo (JPG, PNG, WEBP):",
+        type=["jpg", "jpeg", "png", "webp"],
+        key="music_artist_upload_file",
+    )
 
     # Resolve active image
     active_img_source = None
@@ -67,9 +57,6 @@ def _render_music_artist_classifier_tab():
     if uploaded_file:
         active_img_source = uploaded_file
         source_label = f"Uploaded Photo: {uploaded_file.name}"
-    elif preset_choice and preset_choice != "— Choose a sample music artist —":
-        active_img_source = sample_dict.get(preset_choice)
-        source_label = f"Catalog Sample: {preset_choice}"
 
     detect_btn = st.button("🔍 Predict Music Artist", type="primary", key="btn_detect_music_artist")
 

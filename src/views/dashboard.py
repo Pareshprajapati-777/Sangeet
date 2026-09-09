@@ -115,13 +115,20 @@ def render_dashboard():
         if artist_ranks:
             for a in artist_ranks:
                 st.markdown(f"""
-                <div class="song-card">
-                    <div>
-                        <strong style="color: #0f172a; font-size: 15px;">🎤 {html.escape(str(a['name']))}</strong><br/>
-                        <small style="color: #64748b; font-weight: 500;">{a['song_count']:,} Tracks In Catalog</small>
+                <div class="song-card artist-card">
+                    <div class="artist-card-left">
+                        <div class="mic-popup-badge">
+                            <span class="mic-wave-ring ring-1"></span>
+                            <span class="mic-wave-ring ring-2"></span>
+                            <span class="mic-popup-icon">🎤</span>
+                        </div>
+                        <div class="artist-card-details">
+                            <strong class="artist-card-title">{html.escape(str(a['name']))}</strong>
+                            <small class="artist-card-meta">{a['song_count']:,} Tracks In Catalog</small>
+                        </div>
                     </div>
                     <div>
-                        <span class="badge badge-score">★ {a['avg_popularity']} Pop</span>
+                        <span class="badge badge-score artist-badge-pop">★ {a['avg_popularity']} Pop</span>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)

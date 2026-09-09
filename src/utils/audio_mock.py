@@ -236,12 +236,54 @@ def render_audio_preview_player(
     if auto_render:
         st.audio(audio_data, format="audio/wav")
         spotify_id = _extract_spotify_id(song_id)
+        safe_title = html.escape(str(title or "Master Preview"))
+        safe_artist = html.escape(str(artist or "Sangeet Artist"))
         if spotify_id:
-            st.caption(
-                f"🎧 Master Preview · {title} — {artist} · {int(tempo_value)} BPM · [Open on Spotify](https://open.spotify.com/track/{spotify_id})"
+            spotify_url = f"https://open.spotify.com/track/{spotify_id}"
+            st.markdown(
+                f"""
+                <div class="spotify-meta-strip">
+                    <div class="spotify-track-info">
+                        <span class="spotify-track-badge">MASTER PREVIEW</span>
+                        <span class="spotify-track-name" title="{safe_title}">{safe_title}</span>
+                        <span class="spotify-track-sep">·</span>
+                        <span class="spotify-artist-name" title="{safe_artist}">{safe_artist}</span>
+                        <span class="spotify-track-sep">·</span>
+                        <span class="spotify-bpm-pill">{int(tempo_value)} BPM</span>
+                    </div>
+                    <a href="{spotify_url}" target="_blank" rel="noopener noreferrer" class="spotify-animated-btn" title="Listen to {safe_title} on Spotify">
+                        <svg class="spotify-btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.308c-.218.357-.68.472-1.037.254-2.839-1.735-6.413-2.128-10.623-1.166-.407.094-.813-.162-.907-.568-.094-.407.162-.813.568-.907 4.608-1.053 8.566-.607 11.745 1.349.356.219.472.681.254 1.038zm1.47-3.267c-.275.447-.862.59-1.309.315-3.25-1.997-8.204-2.576-12.048-1.408-.503.153-1.037-.133-1.19-.636-.153-.502.134-1.036.636-1.189 4.394-1.334 9.852-.693 13.596 1.609.447.275.59.862.315 1.309zm.126-3.41c-3.899-2.316-10.334-2.529-14.056-1.398-.598.182-1.233-.157-1.415-.755-.182-.598.157-1.233.755-1.415 4.281-1.3 11.385-1.056 15.865 1.603.538.32.714 1.02.395 1.558-.32.538-1.02.714-1.544.395z"/>
+                        </svg>
+                        <span class="spotify-btn-label">Open on Spotify</span>
+                        <span class="spotify-soundwave">
+                            <span class="sw-bar sw-1"></span>
+                            <span class="sw-bar sw-2"></span>
+                            <span class="sw-bar sw-3"></span>
+                        </span>
+                    </a>
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
         else:
-            st.caption(f"🎧 Master Preview · {title} — {artist} · {int(tempo_value)} BPM · Key {key_value}")
+            st.markdown(
+                f"""
+                <div class="spotify-meta-strip">
+                    <div class="spotify-track-info">
+                        <span class="spotify-track-badge">MASTER PREVIEW</span>
+                        <span class="spotify-track-name" title="{safe_title}">{safe_title}</span>
+                        <span class="spotify-track-sep">·</span>
+                        <span class="spotify-artist-name" title="{safe_artist}">{safe_artist}</span>
+                        <span class="spotify-track-sep">·</span>
+                        <span class="spotify-bpm-pill">{int(tempo_value)} BPM</span>
+                        <span class="spotify-track-sep">·</span>
+                        <span class="spotify-key-pill">Key {key_value}</span>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
         return ""
     return audio_data
 
