@@ -1,61 +1,195 @@
 # 🎵 SANGEET — Music Intelligence & Discovery Platform
 
-**Sangeet** is a local-first, full-stack Music Intelligence and Discovery ecosystem built with Python, Streamlit, and SQLite. It combines music catalog exploration, geospatial mapping, deep facial recognition, content-based recommendation vectors, predictive Machine Learning & Deep Learning laboratories, and an AI conversational musicologist.
+> 🎶 **Explore. Analyze. Recommend. Discover.**  
+> Sangeet is a local-first, full-stack Music Intelligence platform combining music discovery, analytics, geospatial intelligence, computer vision, recommendation systems, ML/DL experiments, and an AI musicologist.
+
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![Scikit Learn](https://img.shields.io/badge/Scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 
 ---
 
-## 🏛️ System Architecture
+## 🌟 What is Sangeet?
 
-Sangeet adheres to a strict layered design:
+**Sangeet** is more than a music player. It is a **Music Intelligence & Discovery ecosystem** built with Python, Streamlit, and SQLite.
 
-```
-Streamlit Pages (UI Presentation)
-       ↓
-Service Layer (ETL, Search, Analytics, Vision, Recommender, ML, DL, Assistant, Location)
-       ↓
-Repository Layer (Parameterized SQL & Transactions)
-       ↓
-SQLite Database (Sangeet.db — Single Source of Truth)
-```
+It brings together:
 
-No business logic or raw SQL queries reside within Streamlit page templates.
+- 🎼 Music catalog exploration
+- 🔎 Smart search and voice interaction
+- 📊 Interactive analytics
+- 🗺️ Artist & filming-location intelligence
+- 📸 Facial recognition for artist identification
+- ✨ Content-based music recommendations
+- 🤖 Machine Learning hit-song classification
+- 🧠 Deep Learning experimentation
+- 🎧 Playlists and favorites
+- 💬 AI-powered conversational musicologist
 
 ---
 
-## 🌟 Key Platform Modules
+## 🏗️ System Architecture
 
-| Module | Features & Capabilities |
+Sangeet follows a clean layered architecture so UI code stays separate from business logic and database operations.
+
+```text
+┌─────────────────────────────────────┐
+│       🖥️ Streamlit UI / Pages       │
+└──────────────────┬──────────────────┘
+                   ↓
+┌─────────────────────────────────────┐
+│     ⚙️ Service Layer                │
+│ ETL • Search • Analytics • Vision   │
+│ Recommender • ML • DL • AI • Maps   │
+└──────────────────┬──────────────────┘
+                   ↓
+┌─────────────────────────────────────┐
+│     🗄️ Repository Layer             │
+│   Parameterized SQL & Transactions  │
+└──────────────────┬──────────────────┘
+                   ↓
+┌─────────────────────────────────────┐
+│       💾 SQLite Database             │
+│       Sangeet.db — Source of Truth │
+└─────────────────────────────────────┘
+```
+
+> 🔐 Business logic and raw SQL queries are kept outside Streamlit page templates.
+
+---
+
+## 🚀 Platform Features
+
+| # | Module | What it does |
+|---|---|---|
+| 01 | 📊 **Dashboard** | Live catalog telemetry, top artists, genres, albums, locations, and acoustic-feature insights. |
+| 02 | 🔎 **Smart Search & Voice** | Search by title, artist, album, genre, language, year, popularity, plus browser voice interaction. |
+| 03 | 📥 **Data Manager** | Kaggle synchronization, CSV import, schema validation, deduplication audits, and CRUD operations. |
+| 04 | 📈 **Analytics** | Plotly-powered vibe maps, correlation heatmaps, valence distributions, and release-year trends. |
+| 05 | 🗺️ **Artist & Filming Map** | Interactive Folium maps connecting musical works with real-world filming and cultural locations. |
+| 06 | 📸 **Image Intelligence** | 128-dimensional facial embeddings for artist recognition with low-confidence unknown detection. |
+| 07 | ✨ **Content Recommender** | Cosine-similarity recommendations using danceability, energy, loudness, tempo, and valence. |
+| 08 | 🎧 **Playlists & Favorites** | Create custom collections, explore curated playlists, and save favorite tracks. |
+| 09 | 🧪 **ML Laboratory** | Random Forest, Logistic Regression, and Gradient Boosting for hit-song classification. |
+| 10 | 🧠 **Deep Learning Lab** | PyTorch feed-forward neural network with BatchNorm and Dropout, plus training curves. |
+| 11 | 🤖 **Sangeet AI Assistant** | AI musicologist powered by OpenRouter with a local SQLite fallback and voice synthesis. |
+
+---
+
+## 🎯 Recommendation Engine
+
+The recommendation system uses **content-based filtering** rather than collaborative user history.
+
+### 🎚️ Audio Features
+
+- 💃 Danceability
+- ⚡ Energy
+- 🔊 Loudness
+- 🥁 Tempo
+- 😊 Valence
+
+Recommendations are generated using **cosine similarity**, with a transparent **"Why this was recommended?"** explanation.
+
+---
+
+## 🧪 Machine Learning Lab
+
+Train and evaluate multiple classification models for **Hit Song Classification**:
+
+- 🌲 Random Forest
+- 📉 Logistic Regression
+- 🚀 Gradient Boosting
+
+### 📊 Evaluation
+
+- ROC-AUC
+- Confusion Matrix
+- Feature Importance
+- Custom live-track scoring
+
+---
+
+## 🧠 Deep Learning Lab
+
+Sangeet includes a PyTorch-based Feed-Forward Neural Network featuring:
+
+- 🔢 Dense layers
+- 📏 BatchNorm1d
+- 💧 Dropout regularization
+- 📉 Real-time loss tracking
+- 🎯 Accuracy tracking across epochs
+
+---
+
+## 📸 Computer Vision
+
+The Image Intelligence module uses **dlib + face_recognition** to create **128-dimensional face embeddings**.
+
+Upload an artist image → extract the embedding → compare against indexed references → return the closest artist match or **Unknown** when confidence is insufficient.
+
+---
+
+## 🎵 Audio Preview
+
+Sangeet does **not distribute copyrighted song audio**.
+
+Instead, audio previews are synthesized from stored musical features, allowing users to interact with the catalog while keeping the project local-first.
+
+---
+
+## 🗺️ Geospatial Intelligence
+
+Explore musical works through interactive maps powered by **Folium**.
+
+Example locations include:
+
+📍 Film City Mumbai  
+📍 Mehboob Studio  
+📍 Nizamuddin Dargah  
+📍 Kashmir Betaab Valley  
+📍 Swiss Yash Chopra locations
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
 |---|---|
-| **📊 Dashboard** | Live catalog telemetry (songs, artists, albums, genres, locations), top artist rankings, and average acoustic feature radar DNA. |
-| **🔍 Smart Search & Voice** | Multi-attribute filtering (title, artist, album, genre, language, year, popularity), native browser audio controls for feature-driven previews, and browser Web Speech Text-to-Speech readouts. |
-| **📥 Data Manager / CRUD** | Kaggle API dataset synchronization, CSV upload & schema validation, deduplication audit logging, and full database CRUD operations for songs and artists. |
-| **📈 Analytics** | Multidimensional Plotly visualizations: Danceability vs. Energy vibe mapping, audio feature correlation heatmaps, valence distributions, and release year trends. |
-| **🗺️ Artist & Filming Map** | Interactive Folium geospatial intelligence with clustered markers, tooltips, and rich HTML popups linking real-world locations (Film City Mumbai, Mehboob Studio, Nizamuddin Dargah, Kashmir Betaab Valley, Swiss Yash Chopra lakes) to musical works. |
-| **📸 Image Intelligence** | Upload artist portraits and real gallery references; 128-dimensional facial embeddings match indexed references with an explicit unknown result when confidence is low. |
-| **✨ Content Recommender** | Content-based cosine similarity engine evaluating acoustic feature vectors (danceability, energy, loudness, tempo, valence) with transparent "Why this was recommended" explanations. |
-| **🎧 Playlists & Favorites** | Create and manage custom collections, explore curated sets (Bollywood Essentials, Sufi & Soulful, High-Octane Bhangra), and bookmark favorite tracks. |
-| **🧪 ML Laboratory** | Train and evaluate classical machine learning models (Random Forest, Logistic Regression, Gradient Boosting) for Hit Song Classification. Inspect ROC-AUC, confusion matrices, feature importances, and score live custom tracks. |
-| **🧠 Deep Learning Lab** | PyTorch Feed-Forward Deep Neural Network with BatchNorm1d and Dropout regularization. Inspect real-time loss and accuracy curves across training epochs. |
-| **🤖 Sangeet AI Assistant** | Grounded conversational musicologist powered by OpenRouter (`google/gemini-3.8-flash`) with a local SQLite fallback when the API is unavailable, plus voice speech synthesis. |
-
-Audio previews are synthesized from the stored audio features because this local catalog does not distribute copyrighted song audio. Use the native player on any song card to listen to an instrumental preview.
-
-The main shell keeps the existing tab design while grouping Image Intelligence with the Deep Learning Lab in tab 6, and Recommendations with the Machine Learning Lab in tab 7. The merged tabs expose quick results first and keep the full experiment controls inside expandable sections.
+| 🐍 Language | Python |
+| 🎨 UI | Streamlit |
+| 🗄️ Database | SQLite |
+| 📊 Visualization | Plotly, Matplotlib |
+| 🗺️ Maps | Folium |
+| 🤖 Machine Learning | Scikit-learn |
+| 🧠 Deep Learning | PyTorch |
+| 👁️ Computer Vision | dlib, face_recognition |
+| 💬 AI | OpenRouter |
+| 📦 Data | Pandas, NumPy, Kaggle API |
+| 🧪 Testing | Pytest |
 
 ---
 
-## 🚀 Getting Started
+## ⚡ Getting Started
 
-### 1. Prerequisites
-Ensure Python 3.10+ is installed on your machine.
+### 1️⃣ Clone the repository
 
-### 2. Install Dependencies
+```bash
+git clone https://github.com/Pareshprajapati-777/Sangeet.git
+cd Sangeet
+```
+
+### 2️⃣ Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Environment Variables
-Your `.env` file should configure:
+### 3️⃣ Configure environment variables
+
+Create a `.env` file:
+
 ```env
 DATABASE_URL=sqlite:///Sangeet.db
 MAX_UPLOAD_SIZE_MB=50
@@ -64,77 +198,86 @@ KAGGLE_USERNAME=your_kaggle_username
 KAGGLE_KEY=your_kaggle_api_key
 ```
 
-### 4. Database Setup & Seeding
-To initialize the SQLite schema and seed the catalog:
+> 🔒 Never commit real API keys or secrets to GitHub.
+
+### 4️⃣ Initialize the database
+
 ```bash
 python database/seed.py
 ```
 
-### 5. Launch the Application
+### 5️⃣ Launch Sangeet
+
 ```bash
 streamlit run app.py
 ```
-Open your browser at `http://localhost:8501`.
+
+Then open:
+
+```text
+http://localhost:8501
+```
 
 ---
 
-## 🧪 Automated Testing
-Run the complete automated test suite:
+## 🧪 Run Tests
+
+Run the complete test suite:
+
 ```bash
 python -m pytest tests/
 ```
 
 ---
 
-## 📁 Repository Structure
+## 📁 Project Structure
 
-`app.py` is the canonical 9-tab shell. Tab 6 groups artist-photo intelligence with DL, and tab 7 groups recommendations with ML; the `pages/` files remain compatibility wrappers for the original standalone pages.
-
-```
+```text
 Sangeet/
-├── app.py                     # Main Streamlit entrance & dark theme shell
-├── requirements.txt           # Python dependency specifications
-├── README.md                  # System manual and architecture documentation
-├── .env                       # Local secrets & API keys
-├── Sangeet.db                 # Canonical SQLite database
 │
-├── assets/
-│   ├── style.css              # Custom dark-mode glassmorphic theme
-│   └── artist_gallery/        # Reference artist portraits
+├── 🎵 app.py
+├── 📦 requirements.txt
+├── 📖 README.md
+├── 🔐 .env
+├── 💾 Sangeet.db
 │
-├── database/
-│   ├── schema.sql             # Canonical SQLite table schemas & indexes
-│   └── seed.py                # Database seeder (curated catalog + Kaggle sync + real face references)
+├── 🎨 assets/
+│   ├── style.css
+│   └── artist_gallery/
 │
-├── src/
-│   ├── config.py              # Environment configuration & path constants
-│   ├── db.py                  # Thread-safe SQLite connection & transaction manager
+├── 🗄️ database/
+│   ├── schema.sql
+│   └── seed.py
+│
+├── ⚙️ src/
+│   ├── config.py
+│   ├── db.py
 │   ├── domain/
-│   │   └── entities.py        # Domain data classes & contracts
+│   │   └── entities.py
 │   ├── repositories/
-│   │   ├── base.py            # Generic query executor
-│   │   ├── songs.py           # Song & audio features repository
-│   │   ├── artists.py         # Artist profile & face encodings repository
-│   │   ├── albums.py          # Album tracklist repository
-│   │   ├── locations.py       # Geographical points of interest repository
-│   │   └── playlists.py       # Playlists & favorites persistence
+│   │   ├── base.py
+│   │   ├── songs.py
+│   │   ├── artists.py
+│   │   ├── albums.py
+│   │   ├── locations.py
+│   │   └── playlists.py
 │   ├── services/
-│   │   ├── etl.py             # Data acquisition, cleaning & quality audit
-│   │   ├── search.py          # Multi-criteria search with voice summary
-│   │   ├── analytics.py       # Catalog statistics & correlations
-│   │   ├── recommender.py     # Content-based cosine recommendation engine
-│   │   ├── location.py        # Folium interactive geospatial map builder
-│   │   ├── vision.py          # 128-d face recognition & artist matching
-│   │   ├── ml.py              # Scikit-learn tabular classification lab
-│   │   ├── dl.py              # PyTorch Deep Neural Network lab
-│   │   ├── voice.py           # Web Speech API text-to-speech engine
-│   │   └── assistant.py       # Grounded OpenRouter AI Assistant
+│   │   ├── etl.py
+│   │   ├── search.py
+│   │   ├── analytics.py
+│   │   ├── recommender.py
+│   │   ├── location.py
+│   │   ├── vision.py
+│   │   ├── ml.py
+│   │   ├── dl.py
+│   │   ├── voice.py
+│   │   └── assistant.py
 │   └── utils/
-│       ├── audio_mock.py      # Feature-driven synthetic WAV preview generator
-│       └── export_helpers.py  # CSV / JSON export formatters
+│       ├── audio_mock.py
+│       └── export_helpers.py
 │
-├── pages/
-│   ├── 1_Dashboard.py         # Compatibility page wrappers
+├── 📄 pages/
+│   ├── 1_Dashboard.py
 │   ├── 2_Analytics.py
 │   ├── 3_Data_Manager.py
 │   ├── 4_Search.py
@@ -143,14 +286,62 @@ Sangeet/
 │   ├── 7_Playlists.py
 │   └── 8_AI_Assistant.py
 │
-└── tests/
-    └── test_core.py           # Automated test suite
+└── 🧪 tests/
+    └── test_core.py
+```
+
+---
+
+## 🧭 Application Flow
+
+```text
+🎵 Discover Music
+       ↓
+🔎 Search & Filter
+       ↓
+📊 Analyze Audio Features
+       ↓
+✨ Get Recommendations
+       ↓
+🎧 Build Playlists
+       ↓
+📸 Identify Artists
+       ↓
+🗺️ Explore Locations
+       ↓
+🧪 Experiment with ML/DL
+       ↓
+🤖 Ask Sangeet AI
 ```
 
 ---
 
 ## 📜 License & Acknowledgements
-- **Primary Music Features:** Saichaitanya Reddy / Spotify Tracks Dataset (Audio Features)
-- **Local-First Architecture:** SQLite3 WAL mode
-- **Biometric Recognition:** `dlib` & `face_recognition`
-- **Conversational Intelligence:** OpenRouter API (`google/gemini-3.8-flash`)
+
+- 🎼 **Primary Music Features:** Saichaitanya Reddy / Spotify Tracks Dataset
+- 💾 **Local Database:** SQLite3 with WAL mode
+- 👁️ **Biometric Recognition:** dlib & face_recognition
+- 🤖 **Conversational Intelligence:** OpenRouter / Google Gemini
+- 🐍 **Core Ecosystem:** Python, Streamlit, Pandas, NumPy, PyTorch & Scikit-learn
+
+---
+
+## ⭐ Support the Project
+
+If you find **Sangeet** useful or interesting:
+
+⭐ Star the repository  
+🍴 Fork the project  
+🐛 Report issues  
+💡 Suggest improvements  
+🤝 Contribute
+
+---
+
+<div align="center">
+
+### 🎶 Sangeet — Turning Music Data into Intelligence. 🎶
+
+**Built with Python 🐍 • Data 📊 • AI 🤖 • Music 🎵**
+
+</div>
