@@ -279,14 +279,6 @@ class ETLService:
                 json.dumps({"chunks_processed": chunk_index}),
                 f"Full loop completed: {total_inserted} songs inserted across {chunk_index} batch loops."
             ))
-            # Sync FTS table
-            cursor.execute("""
-                INSERT OR IGNORE INTO songs_fts (song_id, title, artist_name, album_title, genre)
-                SELECT s.id, s.title, a.name, COALESCE(alb.title, ''), COALESCE(s.genre, '')
-                FROM songs s
-                JOIN artists a ON s.artist_id = a.id
-                LEFT JOIN albums alb ON s.album_id = alb.id
-            """)
             conn.commit()
             invalidate_analytics_cache()
 
@@ -517,13 +509,6 @@ class ETLService:
                 json.dumps({k: int(v) for k, v in missing_counts.items()}),
                 f"Successfully ingested {inserted_count} songs with {rejected_count} rejections."
             ))
-            cursor.execute("""
-                INSERT OR IGNORE INTO songs_fts (song_id, title, artist_name, album_title, genre)
-                SELECT s.id, s.title, a.name, COALESCE(alb.title, ''), COALESCE(s.genre, '')
-                FROM songs s
-                JOIN artists a ON s.artist_id = a.id
-                LEFT JOIN albums alb ON s.album_id = alb.id
-            """)
             conn.commit()
             invalidate_analytics_cache()
 

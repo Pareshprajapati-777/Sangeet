@@ -159,12 +159,3 @@ CREATE INDEX IF NOT EXISTS idx_song_loc_loc ON song_locations(location_id);
 CREATE INDEX IF NOT EXISTS idx_playlist_songs_rel ON playlist_songs(playlist_id, song_id);
 CREATE INDEX IF NOT EXISTS idx_user_favorites_type_id ON user_favorites(item_type, item_id);
 
--- FTS5 Full Text Search index for instantaneous multi-keyword search
-CREATE VIRTUAL TABLE IF NOT EXISTS songs_fts USING fts5(
-    song_id UNINDEXED,
-    title,
-    artist_name,
-    album_title,
-    genre,
-    tokenize = 'porter unicode61'
-);

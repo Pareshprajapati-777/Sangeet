@@ -4,19 +4,12 @@ Encapsulates all database operations for songs and song audio features with
 FTS5 full-text indexing and query optimization.
 """
 
-import re
 from typing import List, Dict, Any, Optional
 from src.repositories.base import BaseRepository
 from src.db import get_db
 
 _GENRES_CACHE: Optional[List[str]] = None
 _LANGUAGES_CACHE: Optional[List[str]] = None
-
-def _format_fts_query(text: str) -> str:
-    tokens = re.findall(r'[\w]+', text)
-    if not tokens:
-        return ""
-    return " ".join([f'"{t}"*' for t in tokens])
 
 class SongRepository(BaseRepository):
     def get_by_id(self, song_id: str) -> Optional[Dict[str, Any]]:
@@ -48,50 +41,6 @@ class SongRepository(BaseRepository):
         offset: int = 0
     ) -> List[Dict[str, Any]]:
         cleaned_query = (query or "").strip()
-        fts_query = _format_fts_query(cleaned_query) if cleaned_query else ""
-
-        if fts_query:
-            try:
-                sql = """
-                    SELECT s.*, a.name AS artist_name, alb.title AS album_title,
-                           f.danceability, f.energy, f.key, f.loudness, f.mode,
-                           f.speechiness, f.acousticness, f.instrumentalness,
-                           f.liveness, f.valence, f.tempo, f.time_signature
-                    FROM songs_fts fts
-                    JOIN songs s ON fts.song_id = s.id
-                    JOIN artists a ON s.artist_id = a.id
-                    LEFT JOIN albums alb ON s.album_id = alb.id
-                    LEFT JOIN song_audio_features f ON s.id = f.song_id
-                    WHERE songs_fts MATCH ?
-                """
-                params: List[Any] = [fts_query]
-
-                if artist_id:
-                    sql += " AND s.artist_id = ?"
-                    params.append(artist_id)
-                if genre and genre != "All":
-                    sql += " AND s.genre = ?"
-                    params.append(genre)
-                if language and language != "All":
-                    sql += " AND s.language = ?"
-                    params.append(language)
-                if year_min is not None:
-                    sql += " AND s.release_year >= ?"
-                    params.append(year_min)
-                if year_max is not None:
-                    sql += " AND s.release_year <= ?"
-                    params.append(year_max)
-                if min_popularity is not None:
-                    sql += " AND s.popularity >= ?"
-                    params.append(min_popularity)
-
-                sql += " ORDER BY s.popularity DESC, s.title ASC LIMIT ? OFFSET ?"
-                params.extend([limit, offset])
-                return self.fetch_all(sql, tuple(params))
-            except Exception:
-                pass  # Fallback to standard query if FTS query syntax error
-
-        # Standard indexed query
         sql = """
             SELECT s.*, a.name AS artist_name, alb.title AS album_title,
                    f.danceability, f.energy, f.key, f.loudness, f.mode,
@@ -150,43 +99,6 @@ class SongRepository(BaseRepository):
         min_popularity: Optional[int] = None
     ) -> int:
         cleaned_query = (query or "").strip()
-        fts_query = _format_fts_query(cleaned_query) if cleaned_query else ""
-
-        if fts_query:
-            try:
-                sql = """
-                    SELECT COUNT(*) AS total
-                    FROM songs_fts fts
-                    JOIN songs s ON fts.song_id = s.id
-                    JOIN artists a ON s.artist_id = a.id
-                    WHERE songs_fts MATCH ?
-                """
-                params: List[Any] = [fts_query]
-
-                if artist_id:
-                    sql += " AND s.artist_id = ?"
-                    params.append(artist_id)
-                if genre and genre != "All":
-                    sql += " AND s.genre = ?"
-                    params.append(genre)
-                if language and language != "All":
-                    sql += " AND s.language = ?"
-                    params.append(language)
-                if year_min is not None:
-                    sql += " AND s.release_year >= ?"
-                    params.append(year_min)
-                if year_max is not None:
-                    sql += " AND s.release_year <= ?"
-                    params.append(year_max)
-                if min_popularity is not None:
-                    sql += " AND s.popularity >= ?"
-                    params.append(min_popularity)
-
-                row = self.fetch_one(sql, tuple(params))
-                return row["total"] if row else 0
-            except Exception:
-                pass
-
         sql = """
             SELECT COUNT(*) AS total
             FROM songs s
@@ -318,16 +230,6 @@ class SongRepository(BaseRepository):
                     audio_data.get("time_signature", 4)
                 ))
 
-            # Keep FTS index in sync
-            cursor.execute("""
-                INSERT OR REPLACE INTO songs_fts (song_id, title, artist_name, album_title, genre)
-                SELECT s.id, s.title, a.name, COALESCE(alb.title, ''), COALESCE(s.genre, '')
-                FROM songs s
-                JOIN artists a ON s.artist_id = a.id
-                LEFT JOIN albums alb ON s.album_id = alb.id
-                WHERE s.id = ?
-            """, (song_data["id"],))
-
         return True
 
     def update_song(self, song_id: str, song_data: Dict[str, Any]) -> bool:
@@ -351,14 +253,6 @@ class SongRepository(BaseRepository):
                 1 if song_data.get("is_hit") else 0,
                 song_id
             ))
-            cursor.execute("""
-                INSERT OR REPLACE INTO songs_fts (song_id, title, artist_name, album_title, genre)
-                SELECT s.id, s.title, a.name, COALESCE(alb.title, ''), COALESCE(s.genre, '')
-                FROM songs s
-                JOIN artists a ON s.artist_id = a.id
-                LEFT JOIN albums alb ON s.album_id = alb.id
-                WHERE s.id = ?
-            """, (song_id,))
         return True
 
     def delete_song(self, song_id: str) -> bool:
@@ -368,7 +262,6 @@ class SongRepository(BaseRepository):
         with get_db() as conn:
             cursor = conn.cursor()
             cursor.execute("DELETE FROM songs WHERE id = ?", (song_id,))
-            cursor.execute("DELETE FROM songs_fts WHERE song_id = ?", (song_id,))
         return True
 
     def get_features_matrix(self, limit: Optional[int] = 5000) -> List[Dict[str, Any]]:
