@@ -52,33 +52,37 @@ def render_assistant():
 
     st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
 
-    # Render Chat History
-    for idx, msg in enumerate(st.session_state.chat_messages):
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
-            if msg["role"] == "assistant" and len(msg["content"]) > 25:
-                VoiceService.render_speech_widget(
-                    msg["content"],
-                    auto_play=False,
-                    button_label="Listen to AI Voice"
-                )
+    # Render Chat Messages inside fixed-height scroll container to prevent input dislocation
+    chat_container = st.container(height=520)
+    with chat_container:
+        for idx, msg in enumerate(st.session_state.chat_messages):
+            with st.chat_message(msg["role"]):
+                st.markdown(msg["content"])
+                if msg["role"] == "assistant" and len(msg["content"]) > 25:
+                    VoiceService.render_speech_widget(
+                        msg["content"],
+                        auto_play=False,
+                        button_label="Listen to AI Voice"
+                    )
 
     user_input = st.chat_input("Ask Sangeet AI about songs, artists, audio features, or project architecture...", key="ai_chat_input")
 
     query_to_send = preset_query or user_input
     if query_to_send:
         st.session_state.chat_messages.append({"role": "user", "content": query_to_send})
-        with st.chat_message("user"):
-            st.markdown(query_to_send)
+        with chat_container:
+            with st.chat_message("user"):
+                st.markdown(query_to_send)
 
-        with st.chat_message("assistant"):
-            with st.spinner("Consulting Sangeet RAG catalog and synthesizing response..."):
-                reply = assistant_service.chat(st.session_state.chat_messages)
-                st.markdown(reply)
-                VoiceService.render_speech_widget(
-                    reply,
-                    auto_play=auto_speak_chat,
-                    button_label="Listen to AI Voice"
-                )
-                st.session_state.chat_messages.append({"role": "assistant", "content": reply})
+            with st.chat_message("assistant"):
+                with st.spinner("Consulting Sangeet RAG catalog and synthesizing response..."):
+                    reply = assistant_service.chat(st.session_state.chat_messages)
+                    st.markdown(reply)
+                    VoiceService.render_speech_widget(
+                        reply,
+                        auto_play=auto_speak_chat,
+                        button_label="Listen to AI Voice"
+                    )
+                    st.session_state.chat_messages.append({"role": "assistant", "content": reply})
+        st.rerun()
 
