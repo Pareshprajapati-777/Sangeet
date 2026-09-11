@@ -107,6 +107,11 @@ class ArtistRepository(BaseRepository):
             artist_data.get("image_url"),
             artist_data.get("mb_id")
         ))
+        try:
+            from src.services.analytics import invalidate_analytics_cache
+            invalidate_analytics_cache()
+        except Exception:
+            pass
         return True
 
     def save_face_encoding(self, artist_id: str, artist_name: str, image_path: str, encoding: List[float]) -> bool:

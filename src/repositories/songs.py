@@ -230,9 +230,21 @@ class SongRepository(BaseRepository):
                     audio_data.get("time_signature", 4)
                 ))
 
+        # Live sync to Ingestion / Quality runs telemetry (114K metric) and invalidate cache
+        try:
+            from src.services.etl import sync_crud_to_quality_runs
+            sync_crud_to_quality_runs(action="create", count=1, song_title=song_data.get("title", ""))
+        except Exception:
+            pass
+        try:
+            from src.services.analytics import invalidate_analytics_cache
+            invalidate_analytics_cache()
+        except Exception:
+            pass
+
         return True
 
-    def update_song(self, song_id: str, song_data: Dict[str, Any]) -> bool:
+    def update_song(self, song_id: str, song_data: Dict[str, Any], audio_data: Optional[Dict[str, Any]] = None) -> bool:
         global _GENRES_CACHE, _LANGUAGES_CACHE
         _GENRES_CACHE = None
         _LANGUAGES_CACHE = None
@@ -253,15 +265,73 @@ class SongRepository(BaseRepository):
                 1 if song_data.get("is_hit") else 0,
                 song_id
             ))
+            if audio_data:
+                feature_sql = """
+                    INSERT INTO song_audio_features
+                    (song_id, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, time_signature)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(song_id) DO UPDATE SET
+                        danceability = excluded.danceability,
+                        energy = excluded.energy,
+                        valence = excluded.valence
+                """
+                cursor.execute(feature_sql, (
+                    song_id,
+                    audio_data.get("danceability", 0.5),
+                    audio_data.get("energy", 0.5),
+                    audio_data.get("key", 0),
+                    audio_data.get("loudness", -10.0),
+                    audio_data.get("mode", 1),
+                    audio_data.get("speechiness", 0.05),
+                    audio_data.get("acousticness", 0.5),
+                    audio_data.get("instrumentalness", 0.0),
+                    audio_data.get("liveness", 0.15),
+                    audio_data.get("valence", 0.5),
+                    audio_data.get("tempo", 120.0),
+                    audio_data.get("time_signature", 4)
+                ))
+
+        try:
+            from src.services.etl import sync_crud_to_quality_runs
+            sync_crud_to_quality_runs(action="update", count=0, song_title=song_data.get("title", ""))
+        except Exception:
+            pass
+        try:
+            from src.services.analytics import invalidate_analytics_cache
+            invalidate_analytics_cache()
+        except Exception:
+            pass
+
         return True
 
     def delete_song(self, song_id: str) -> bool:
         global _GENRES_CACHE, _LANGUAGES_CACHE
         _GENRES_CACHE = None
         _LANGUAGES_CACHE = None
+        deleted_title = ""
+        try:
+            existing = self.get_by_id(song_id)
+            if existing:
+                deleted_title = existing.get("title", "")
+        except Exception:
+            pass
+
         with get_db() as conn:
             cursor = conn.cursor()
+            cursor.execute("DELETE FROM song_audio_features WHERE song_id = ?", (song_id,))
             cursor.execute("DELETE FROM songs WHERE id = ?", (song_id,))
+
+        try:
+            from src.services.etl import sync_crud_to_quality_runs
+            sync_crud_to_quality_runs(action="delete", count=1, song_title=deleted_title)
+        except Exception:
+            pass
+        try:
+            from src.services.analytics import invalidate_analytics_cache
+            invalidate_analytics_cache()
+        except Exception:
+            pass
+
         return True
 
     def get_features_matrix(self, limit: Optional[int] = 5000) -> List[Dict[str, Any]]:

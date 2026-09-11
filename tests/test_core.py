@@ -154,4 +154,70 @@ def test_image_artist_classifier_service():
     assert len(res["predictions"]) == 3
     assert res["gradcam_image"] is not None
 
+def test_crud_telemetry_live_reflection():
+    import uuid
+    from src.services.etl import ETLService
+
+    song_repo = SongRepository()
+    artist_repo = ArtistRepository()
+    analytics = AnalyticsService()
+    etl = ETLService()
+
+    arijit = artist_repo.get_by_name("Arijit Singh")
+    artist_id = arijit["id"] if arijit else artist_repo.get_all_artists(limit=1)[0]["id"]
+
+    kpis_start = analytics.get_overview_kpis(force_refresh=True)
+    report_start = etl.get_latest_quality_report()
+
+    test_song_id = f"test_{uuid.uuid4().hex[:8]}"
+    test_title = f"Test Track {test_song_id}"
+
+    # 1. Create Song -> Metrics must increase live
+    song_repo.create_song(
+        song_data={
+            "id": test_song_id,
+            "title": test_title,
+            "artist_id": artist_id,
+            "release_year": 2025,
+            "popularity": 88,
+            "genre": "bollywood",
+            "language": "Hindi",
+            "is_hit": 1
+        },
+        audio_data={"danceability": 0.75, "energy": 0.85, "valence": 0.65}
+    )
+
+    kpis_created = analytics.get_overview_kpis()
+    report_created = etl.get_latest_quality_report()
+
+    assert kpis_created["total_songs"] == kpis_start["total_songs"] + 1
+    assert report_created["total_rows"] == report_start["total_rows"] + 1
+    assert report_created["inserted_rows"] == report_start["inserted_rows"] + 1
+    assert test_title in report_created["status_message"]
+
+    # 2. Update Song -> Telemetry message reflects update
+    song_repo.update_song(
+        test_song_id,
+        {
+            "title": test_title + " (Live Edit)",
+            "release_year": 2025,
+            "popularity": 95,
+            "genre": "pop",
+            "language": "Hindi",
+            "is_hit": 1
+        }
+    )
+    report_updated = etl.get_latest_quality_report()
+    assert "Live Edit" in report_updated["status_message"]
+
+    # 3. Delete Song -> Metrics must decrement back live
+    song_repo.delete_song(test_song_id)
+
+    kpis_deleted = analytics.get_overview_kpis()
+    report_deleted = etl.get_latest_quality_report()
+
+    assert kpis_deleted["total_songs"] == kpis_start["total_songs"]
+    assert report_deleted["total_rows"] == report_start["total_rows"]
+    assert report_deleted["inserted_rows"] == report_start["inserted_rows"]
+
 

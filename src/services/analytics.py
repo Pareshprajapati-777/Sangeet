@@ -12,7 +12,7 @@ from src.repositories.base import BaseRepository
 
 _ANALYTICS_CACHE: Dict[str, Any] = {}
 _ANALYTICS_CACHE_TIMESTAMP: float = 0
-CACHE_TTL = 300.0  # 5 minutes in-memory cache
+CACHE_TTL = 30.0  # Fast 30s cache for real-time reactivity
 
 def _get_cached(key: str) -> Optional[Any]:
     global _ANALYTICS_CACHE, _ANALYTICS_CACHE_TIMESTAMP
@@ -27,16 +27,19 @@ def _set_cached(key: str, value: Any) -> None:
     _ANALYTICS_CACHE_TIMESTAMP = time.time()
 
 def invalidate_analytics_cache():
-    global _ANALYTICS_CACHE
+    global _ANALYTICS_CACHE, _ANALYTICS_CACHE_TIMESTAMP
     _ANALYTICS_CACHE.clear()
+    _ANALYTICS_CACHE_TIMESTAMP = 0.0
 
 class AnalyticsService:
     def __init__(self):
         self.song_repo = SongRepository()
         self.base_repo = BaseRepository()
 
-    def get_overview_kpis(self) -> Dict[str, Any]:
+    def get_overview_kpis(self, force_refresh: bool = False) -> Dict[str, Any]:
         """Calculates headline numbers for the Dashboard."""
+        if force_refresh:
+            invalidate_analytics_cache()
         cached = _get_cached("overview_kpis")
         if cached is not None:
             return cached
