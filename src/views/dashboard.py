@@ -36,10 +36,18 @@ def render_dashboard():
     delta_songs = kpis["total_songs"] - base_songs
     delta_songs_str = f"{delta_songs:+d} Live" if delta_songs != 0 else "Live Sync"
 
+    base_artists = 17640
+    delta_artists = kpis["total_artists"] - base_artists
+    delta_artists_str = f"{delta_artists:+d} Live" if delta_artists != 0 else "Live Sync"
+
+    base_albums = 57644
+    delta_albums = kpis["total_albums"] - base_albums
+    delta_albums_str = f"{delta_albums:+d} Live" if delta_albums != 0 else "Live Sync"
+
     col1, col2, col3, col4, col5 = st.columns(5)
     col1.metric("Total Songs", f"{kpis['total_songs']:,}", delta=delta_songs_str)
-    col2.metric("Artists", f"{kpis['total_artists']:,}")
-    col3.metric("Albums", f"{kpis['total_albums']:,}")
+    col2.metric("Artists", f"{kpis['total_artists']:,}", delta=delta_artists_str)
+    col3.metric("Albums", f"{kpis['total_albums']:,}", delta=delta_albums_str)
     col4.metric("Genres", kpis["total_genres"])
     col5.metric("Avg Popularity", f"{kpis['avg_popularity']} / 100")
 

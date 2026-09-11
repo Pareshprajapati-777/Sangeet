@@ -220,4 +220,32 @@ def test_crud_telemetry_live_reflection():
     assert report_deleted["total_rows"] == report_start["total_rows"]
     assert report_deleted["inserted_rows"] == report_start["inserted_rows"]
 
+def test_artist_and_album_live_reflection():
+    import uuid
+    from src.repositories.albums import AlbumRepository
+
+    artist_repo = ArtistRepository()
+    album_repo = AlbumRepository()
+    analytics = AnalyticsService()
+
+    kpis_before = analytics.get_overview_kpis(force_refresh=True)
+
+    art_id = f"art_{uuid.uuid4().hex[:8]}"
+    artist_repo.create_artist({"id": art_id, "name": f"Live Artist {art_id}", "country": "India"})
+    kpis_after_art = analytics.get_overview_kpis()
+    assert kpis_after_art["total_artists"] == kpis_before["total_artists"] + 1
+
+    alb_id = f"alb_{uuid.uuid4().hex[:8]}"
+    album_repo.create_album({"id": alb_id, "title": f"Live Album {alb_id}", "artist_id": art_id, "release_year": 2024})
+    kpis_after_alb = analytics.get_overview_kpis()
+    assert kpis_after_alb["total_albums"] == kpis_before["total_albums"] + 1
+
+    # Cleanup
+    album_repo.delete_album(alb_id)
+    artist_repo.delete_artist(art_id)
+
+    kpis_final = analytics.get_overview_kpis(force_refresh=True)
+    assert kpis_final["total_artists"] == kpis_before["total_artists"]
+    assert kpis_final["total_albums"] == kpis_before["total_albums"]
+
 

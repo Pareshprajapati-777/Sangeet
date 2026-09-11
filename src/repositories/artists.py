@@ -114,6 +114,37 @@ class ArtistRepository(BaseRepository):
             pass
         return True
 
+    def update_artist(self, artist_id: str, artist_data: Dict[str, Any]) -> bool:
+        sql = """
+            UPDATE artists
+            SET name = ?, country = ?, birthplace = ?, debut_year = ?
+            WHERE id = ?
+        """
+        self.execute(sql, (
+            artist_data["name"],
+            artist_data.get("country", "India"),
+            artist_data.get("birthplace"),
+            artist_data.get("debut_year"),
+            artist_id
+        ))
+        try:
+            from src.services.analytics import invalidate_analytics_cache
+            invalidate_analytics_cache()
+        except Exception:
+            pass
+        return True
+
+    def delete_artist(self, artist_id: str) -> bool:
+        self.execute("UPDATE songs SET artist_id = NULL WHERE artist_id = ?", (artist_id,))
+        self.execute("UPDATE albums SET artist_id = NULL WHERE artist_id = ?", (artist_id,))
+        self.execute("DELETE FROM artists WHERE id = ?", (artist_id,))
+        try:
+            from src.services.analytics import invalidate_analytics_cache
+            invalidate_analytics_cache()
+        except Exception:
+            pass
+        return True
+
     def save_face_encoding(self, artist_id: str, artist_name: str, image_path: str, encoding: List[float]) -> bool:
         sql = """
             INSERT INTO artist_faces (artist_id, artist_name, image_path, encoding_json)
