@@ -5,12 +5,24 @@ from typing import Any, Dict
 
 import numpy as np
 import pandas as pd
-import torch
-import torch.nn as nn
-import torch.optim as optim
+
+try:
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+    from torch.utils.data import DataLoader, TensorDataset
+except OSError as exc:
+    torch = None
+    nn = None
+    optim = None
+    DataLoader = None
+    TensorDataset = None
+    _TORCH_IMPORT_ERROR = exc
+else:
+    _TORCH_IMPORT_ERROR = None
+
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from torch.utils.data import DataLoader, TensorDataset
 
 from src.repositories.songs import SongRepository
 
@@ -62,6 +74,11 @@ class DLService:
     HIT_THRESHOLD = 70
 
     def __init__(self):
+        if _TORCH_IMPORT_ERROR is not None:
+            raise RuntimeError(
+                "Deep learning tab is unavailable because PyTorch is blocked by Windows App Control policy. "
+                "Install a compatible torch build in a non-blocked environment to enable this feature."
+            )
         self.song_repo = SongRepository()
         self.scaler = StandardScaler()
         self.model = None

@@ -77,7 +77,15 @@ with st.sidebar:
 
 
 # Main Application Tabs Navigation
+# Render each tab in isolation so one optional dependency failure (for example,
+# a blocked PyTorch DLL on Windows) does not stop the rest of the app from loading.
 tabs = st.tabs(list(modules.keys()))
 for tab, render_fn in zip(tabs, modules.values()):
     with tab:
-        render_fn()
+        try:
+            render_fn()
+        except Exception as exc:
+            st.warning(
+                "This module is unavailable in the current environment because a required dependency could not be loaded. "
+                f"Details: {exc}"
+            )

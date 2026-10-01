@@ -11,22 +11,43 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import face_recognition
-import torch
-from torchvision.models import resnet18, ResNet18_Weights
+
+try:
+    import torch
+    from torchvision.models import resnet18, ResNet18_Weights
+except OSError as exc:
+    torch = None
+    resnet18 = None
+    ResNet18_Weights = None
+    _TORCH_IMPORT_ERROR = exc
+else:
+    _TORCH_IMPORT_ERROR = None
 
 from src.config import ROOT_DIR, GALLERY_DIR
 from src.repositories.artists import ArtistRepository
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if torch is not None:
+    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+else:
+    DEVICE = "cpu"
 
 _GALLERY_CACHE: Optional[List[Dict[str, Any]]] = None
 
 class MusicArtistClassifierService:
     def __init__(self):
+        if _TORCH_IMPORT_ERROR is not None:
+            raise RuntimeError(
+                "Music artist recognition is unavailable because PyTorch is blocked by Windows App Control policy. "
+                "Reinstall a compatible PyTorch build or use a non-blocked Python environment."
+            )
         self.artist_repo = ArtistRepository()
         self._visual_model = None
 
     def _get_visual_model(self):
+        if _TORCH_IMPORT_ERROR is not None:
+            raise RuntimeError(
+                "PyTorch is unavailable in this environment; the music artist classifier cannot run."
+            )
         if self._visual_model is None:
             weights = ResNet18_Weights.DEFAULT
             model = resnet18(weights=weights)
