@@ -1,5 +1,10 @@
 # 🎵 SANGEET — Music Intelligence & Discovery Platform
 --------------------------
+
+## 🌐 Live Demo
+
+🚀 **Try the live application:** https://mymusic7.streamlit.app/
+
 > 🎶 **Explore. Analyze. Recommend. Discover.**  
 > Sangeet is a local-first, full-stack Music Intelligence platform combining music discovery, analytics, geospatial intelligence, computer vision, recommendation systems, ML/DL experiments, and an AI musicologist.
 
