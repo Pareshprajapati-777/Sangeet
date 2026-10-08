@@ -6,16 +6,43 @@ Loads settings from .env and defines project path constants.
 import os
 import sys
 from pathlib import Path
-from dotenv import load_dotenv
-
 # Root Directory
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-# Load environment variables
+# Safely load environment variables
 ENV_FILE = ROOT_DIR / ".env"
-load_dotenv(ENV_FILE)
+try:
+    from dotenv import load_dotenv
+    load_dotenv(ENV_FILE)
+except (ImportError, ModuleNotFoundError):
+    pass
+
+# Direct .env fallback parser if dotenv package is absent
+if ENV_FILE.is_file():
+    try:
+        with open(ENV_FILE, "r", encoding="utf-8", errors="ignore") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    k = k.strip()
+                    v = v.strip().strip("'\"")
+                    if k and k not in os.environ:
+                        os.environ[k] = v
+    except Exception:
+        pass
+
+# Streamlit secrets integration (for Streamlit Cloud deployments)
+try:
+    import streamlit as st
+    if hasattr(st, "secrets"):
+        for secret_k, secret_v in st.secrets.items():
+            if isinstance(secret_v, str) and secret_k not in os.environ:
+                os.environ[secret_k] = secret_v
+except Exception:
+    pass
 
 # Project Directories
 SRC_DIR = ROOT_DIR / "src"

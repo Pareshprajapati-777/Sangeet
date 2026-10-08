@@ -11,7 +11,7 @@ try:
     import torch.nn as nn
     import torch.optim as optim
     from torch.utils.data import DataLoader, TensorDataset
-except OSError as exc:
+except (ImportError, ModuleNotFoundError, OSError, Exception) as exc:
     torch = None
     nn = None
     optim = None
@@ -26,23 +26,28 @@ from sklearn.preprocessing import StandardScaler
 
 from src.repositories.songs import SongRepository
 
+_BaseNN = nn.Module if (nn is not None and hasattr(nn, "Module")) else object
 
-class SongClassifierNN(nn.Module):
+
+class SongClassifierNN(_BaseNN):
     """Feed-forward classifier with normalization and dropout."""
 
     def __init__(self, input_dim: int = 9, hidden_dim: int = 64, dropout_rate: float = 0.25):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.BatchNorm1d(hidden_dim),
-            nn.ReLU(),
-            nn.Dropout(dropout_rate),
-            nn.Linear(hidden_dim, hidden_dim // 2),
-            nn.BatchNorm1d(hidden_dim // 2),
-            nn.ReLU(),
-            nn.Dropout(dropout_rate),
-            nn.Linear(hidden_dim // 2, 1),
-        )
+        if nn is not None:
+            super().__init__()
+            self.net = nn.Sequential(
+                nn.Linear(input_dim, hidden_dim),
+                nn.BatchNorm1d(hidden_dim),
+                nn.ReLU(),
+                nn.Dropout(dropout_rate),
+                nn.Linear(hidden_dim, hidden_dim // 2),
+                nn.BatchNorm1d(hidden_dim // 2),
+                nn.ReLU(),
+                nn.Dropout(dropout_rate),
+                nn.Linear(hidden_dim // 2, 1),
+            )
+        else:
+            self.net = None
 
     def forward(self, features):
         return self.net(features)
